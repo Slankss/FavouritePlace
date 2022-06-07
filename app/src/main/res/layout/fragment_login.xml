@@ -8,46 +8,60 @@
     android:layout_height="match_parent"
     tools:context=".Login_Register.LoginFragment">
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/courgette"
+        android:text="Giriş Ekranı"
+        android:textColor="@color/special_black"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
+        android:layout_marginBottom="125dp"
         android:orientation="vertical"
         android:paddingTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <EditText
             android:id="@+id/email_edit_text"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="25dp"
             android:background="@drawable/text_box"
             android:ems="10"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF" />
+            android:textColor="@color/special_black"
+            android:textColorHint="#80000000" />
 
         <EditText
             android:id="@+id/password_edit_text"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="25dp"
             android:background="@drawable/text_box"
             android:ems="10"
             android:hint="Şifre"
             android:inputType="textPassword"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF" />
+            android:textColor="@color/special_black"
+            android:textColorHint="#7E292929" />
 
         <Button
             android:id="@+id/login_btn"
@@ -61,33 +75,15 @@
             android:textSize="16sp"
             app:backgroundTint="@color/special_black" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/go_register_page"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginBottom="5dp"
-                android:text="Hesabın yokmu?"
-                android:textColor="@color/special_black"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/go_register_page"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginBottom="10dp"
-                android:text="Kayıt Ol"
-                android:textColor="#3F51B5"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-        </FrameLayout>
+            android:layout_gravity="center"
+            android:text="Hesabın yok mu? Kayıt Ol"
+            android:textColor="@color/special_black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
