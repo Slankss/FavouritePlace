@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "566065354347",
+    "project_id": "favorimekanlarim-db23c",
+    "storage_bucket": "favorimekanlarim-db23c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:566065354347:android:1619fd24a0cc6f0352c32e",
+        "android_client_info": {
+          "package_name": "com.okankukul.favouriteplace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "566065354347-s7si5it582g8igc67i4dj4cd1to245ed.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAt0pvekQtqsaf85HMWEewzMp5HefC3GrE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "566065354347-s7si5it582g8igc67i4dj4cd1to245ed.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
