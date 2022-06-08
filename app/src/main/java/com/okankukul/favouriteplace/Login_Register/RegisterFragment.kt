@@ -47,16 +47,30 @@ class RegisterFragment : Fragment() {
             check()
         }
 
-        var password = binding.passwordEditText.text.toString()
+        var password = ""
+
+        binding.passwordEditText.doOnTextChanged { text, start, before, count ->
+           password = binding.passwordEditText.text.toString()
+        }
+
+
 
         binding.passwordConfirmEditText.doOnTextChanged { text, start, before, count ->
 
-            if(text != password){
+
+            if(text != password && text!!.length >= password.length){
                 binding.paswordConfirmInputLayout.error = "Parolalar aynı değil"
-            }else if(text.length < password.length){
+            }
+            else if(text.length == 10){
                 binding.paswordConfirmInputLayout.error = null
+
+
             }
 
+        }
+
+        binding.btnTest.setOnClickListener {
+            binding.paswordConfirmInputLayout.error = null
         }
 
 
@@ -70,15 +84,25 @@ class RegisterFragment : Fragment() {
         password_again = binding.passwordConfirmEditText.text.toString().trim()
 
         if(email != "" && username != ""&& password != "" && password_again != "" ){
+
             if(password == password_again){
                 register()
             }
-            else{
-                Toast.makeText(context,"Şifreler Eşleşmiyor!", Toast.LENGTH_LONG).show()
-            }
+            else{ binding.paswordConfirmInputLayout.error = "Parolalar aynı değil" }
         }
         else{
-            Toast.makeText(context,"Girdiğiniz Değerleri Kontrol Ediniz!", Toast.LENGTH_LONG).show()
+
+            if(!email.isEmpty()){ binding.emailInputLayout.error = null }
+            else{ binding.emailInputLayout.error = "Bu alan boş olamaz!" }
+
+            if(!username.isEmpty()){ binding.usernameInputLayout.error = null }
+            else{ binding.usernameInputLayout.error = "Bu alan boş olamaz!" }
+            if (!password.isEmpty()){ binding.paswordInputLayout.error = null }
+            else{ binding.paswordInputLayout.error = "Bu alan boş olamaz!" }
+            if(!password_again.isEmpty()){ binding.paswordConfirmInputLayout.error = null }
+            else{ binding.paswordConfirmInputLayout.error = "Bu alan boş olamaz!" }
+
+            Toast.makeText(context,"Boş Değerler var", Toast.LENGTH_LONG).show()
         }
     }
 

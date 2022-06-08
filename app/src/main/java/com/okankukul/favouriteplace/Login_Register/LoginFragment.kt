@@ -74,16 +74,25 @@ class LoginFragment : Fragment() {
 
                 }
                 else{
-                    Toast.makeText(context,"HATA", Toast.LENGTH_LONG).show()
-
+                    binding.passwordInputLayout.error = null
+                    binding.emailInputLayout.error = null
                 }
+
             }.addOnFailureListener { exception ->
+
                 Toast.makeText(context,exception.localizedMessage, Toast.LENGTH_LONG).show()
             }
 
         }
         else{
-            Toast.makeText(context,"Girdiğiniz Değerleri Kontrol Ediniz!", Toast.LENGTH_LONG).show()
+
+            if(email.isEmpty()){ binding.emailInputLayout.error = "Bu alan boş kalamaz!" }
+            else{ binding.emailInputLayout.error = null }
+
+            if(password.isEmpty()){ binding.passwordInputLayout.error = "Bu alan boş kalamaz" }
+            else { binding.passwordInputLayout.error = null }
+
+            Toast.makeText(context,"Boş değerler var", Toast.LENGTH_LONG).show()
         }
 
     }

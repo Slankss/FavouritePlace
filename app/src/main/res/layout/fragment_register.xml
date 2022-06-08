@@ -35,6 +35,9 @@
             app:boxCornerRadiusTopStart="7dp"
             app:startIconDrawable="@drawable/ic_user"
             tools:layout_editor_absoluteX="1dp"
+            app:helperText=""
+            app:errorTextColor="#FF0000"
+            app:errorIconDrawable="@android:drawable/stat_notify_error"
             app:endIconMode="clear_text"
             app:boxStrokeColor="@color/special_black"
             app:hintTextColor="@color/special_black"
@@ -65,6 +68,9 @@
             app:startIconDrawable="@drawable/ic_email"
             tools:layout_editor_absoluteX="1dp"
             app:endIconMode="clear_text"
+            app:helperText=""
+            app:errorTextColor="#FF0000"
+            app:errorIconDrawable="@android:drawable/stat_notify_error"
             app:boxStrokeColor="@color/special_black"
             app:hintTextColor="@color/special_black"
             app:boxStrokeErrorColor="#FF0000"
@@ -94,6 +100,9 @@
             app:boxCornerRadiusTopStart="7dp"
             app:startIconDrawable="@drawable/password"
             tools:layout_editor_absoluteX="1dp"
+            app:helperText=""
+            app:errorTextColor="#FF0000"
+            app:errorIconDrawable="@android:drawable/stat_notify_error"
             app:endIconMode="password_toggle"
             app:boxStrokeColor="@color/special_black"
             app:hintTextColor="@color/special_black"
@@ -124,11 +133,13 @@
             app:startIconDrawable="@drawable/password"
             tools:layout_editor_absoluteX="1dp"
             app:endIconMode="custom"
-            app:errorIconDrawable="@android:drawable/stat_notify_error"
-            app:errorTextColor="#FF0000"
+
+
             app:boxStrokeColor="@color/special_black"
             app:hintTextColor="@color/special_black"
             app:helperText=""
+            app:errorTextColor="#FF0000"
+            app:errorIconDrawable="@android:drawable/stat_notify_error"
             app:helperTextTextColor="#FF0000"
             app:boxStrokeErrorColor="#FF0000"
             tools:layout_editor_absoluteY="719dp">
@@ -167,7 +178,13 @@
         app:layout_constraintStart_toStartOf="@+id/linearLayout2"
         app:layout_constraintTop_toTopOf="parent" />
 
-
+    <Button
+        android:id="@+id/btnTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
