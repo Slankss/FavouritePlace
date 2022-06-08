@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
@@ -45,6 +46,19 @@ class RegisterFragment : Fragment() {
         binding.registerBtn.setOnClickListener {
             check()
         }
+
+        var password = binding.passwordEditText.text.toString()
+
+        binding.passwordConfirmEditText.doOnTextChanged { text, start, before, count ->
+
+            if(text != password){
+                binding.paswordConfirmInputLayout.error = "Parolalar aynı değil"
+            }else if(text.length < password.length){
+                binding.paswordConfirmInputLayout.error = null
+            }
+
+        }
+
 
     }
 

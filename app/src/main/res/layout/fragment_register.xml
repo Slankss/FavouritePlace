@@ -23,62 +23,126 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
-        <EditText
-            android:id="@+id/username_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/usernameInputLayout"
             android:layout_marginBottom="50dp"
-            android:background="@drawable/text_box"
-            android:ems="10"
-            android:hint="Kullanıcı adı"
-            android:inputType="textPersonName"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF" />
-
-        <EditText
-            android:id="@+id/email_edit_text"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_height="wrap_content"
+            app:boxCornerRadiusBottomEnd="7dp"
+            app:boxCornerRadiusBottomStart="7dp"
+            app:boxCornerRadiusTopEnd="7dp"
+            app:boxCornerRadiusTopStart="7dp"
+            app:startIconDrawable="@drawable/ic_user"
+            tools:layout_editor_absoluteX="1dp"
+            app:endIconMode="clear_text"
+            app:boxStrokeColor="@color/special_black"
+            app:hintTextColor="@color/special_black"
+            app:boxStrokeErrorColor="#FF0000"
+            tools:layout_editor_absoluteY="719dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/username_edit_text"
+                android:layout_width="match_parent"
+                android:textColor="@color/special_black"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textColorHighlight="@color/special_orange"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="Kullanıcı adı" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailInputLayout"
             android:layout_marginBottom="50dp"
-            android:background="@drawable/text_box"
-            android:ems="10"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF" />
-
-
-        <EditText
-            android:id="@+id/password_edit_text"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="50dp"
-            android:background="@drawable/text_box"
-            android:ems="10"
-            android:hint="Şifre"
-            android:inputType="textPassword"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF" />
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_height="wrap_content"
+            app:boxCornerRadiusBottomEnd="7dp"
+            app:boxCornerRadiusBottomStart="7dp"
+            app:boxCornerRadiusTopEnd="7dp"
+            app:boxCornerRadiusTopStart="7dp"
+            app:startIconDrawable="@drawable/ic_email"
+            tools:layout_editor_absoluteX="1dp"
+            app:endIconMode="clear_text"
+            app:boxStrokeColor="@color/special_black"
+            app:hintTextColor="@color/special_black"
+            app:boxStrokeErrorColor="#FF0000"
+            tools:layout_editor_absoluteY="719dp">
 
-        <EditText
-            android:id="@+id/password_confirm_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_edit_text"
+                android:layout_width="match_parent"
+                android:textColor="@color/special_black"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textColorHighlight="@color/special_orange"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="Email" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/paswordInputLayout"
             android:layout_marginBottom="50dp"
-            android:background="@drawable/text_box"
-            android:ems="10"
-            android:hint="Şifre tekrar"
-            android:inputType="textPassword"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF" />
+            android:layout_width="match_parent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_height="wrap_content"
+            app:boxCornerRadiusBottomEnd="7dp"
+            app:boxCornerRadiusBottomStart="7dp"
+            app:boxCornerRadiusTopEnd="7dp"
+            app:boxCornerRadiusTopStart="7dp"
+            app:startIconDrawable="@drawable/password"
+            tools:layout_editor_absoluteX="1dp"
+            app:endIconMode="password_toggle"
+            app:boxStrokeColor="@color/special_black"
+            app:hintTextColor="@color/special_black"
+            app:boxStrokeErrorColor="#FF0000"
+            tools:layout_editor_absoluteY="719dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password_edit_text"
+                android:layout_width="match_parent"
+                android:textColor="@color/special_black"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textColorHighlight="@color/special_orange"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="Parola" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/pasword_confirmInputLayout"
+            android:layout_marginBottom="50dp"
+            android:layout_width="match_parent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_height="wrap_content"
+            app:boxCornerRadiusBottomEnd="7dp"
+            app:boxCornerRadiusBottomStart="7dp"
+            app:boxCornerRadiusTopEnd="7dp"
+            app:boxCornerRadiusTopStart="7dp"
+            app:startIconDrawable="@drawable/password"
+            tools:layout_editor_absoluteX="1dp"
+            app:endIconMode="custom"
+            app:errorIconDrawable="@android:drawable/stat_notify_error"
+            app:errorTextColor="#FF0000"
+            app:boxStrokeColor="@color/special_black"
+            app:hintTextColor="@color/special_black"
+            app:helperText=""
+            app:helperTextTextColor="#FF0000"
+            app:boxStrokeErrorColor="#FF0000"
+            tools:layout_editor_absoluteY="719dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password_confirm_edit_text"
+                android:layout_width="match_parent"
+                android:textColor="@color/special_black"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textColorHighlight="@color/special_orange"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="Parola tekrar" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/register_btn"
@@ -102,6 +166,8 @@
         app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
         app:layout_constraintStart_toStartOf="@+id/linearLayout2"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

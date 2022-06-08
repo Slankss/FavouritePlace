@@ -51,7 +51,9 @@
             app:endIconMode="clear_text"
             app:hintTextColor="@color/special_black"
             tools:layout_editor_absoluteX="1dp"
-            app:startIconDrawable="@android:drawable/ic_dialog_email">
+
+
+            app:startIconDrawable="@drawable/ic_email">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email_edit_text"
                 android:textColor="@color/special_black"
