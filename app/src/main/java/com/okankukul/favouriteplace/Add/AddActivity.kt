@@ -97,7 +97,7 @@ class AddActivity : AppCompatActivity() {
         }
         else
         {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,1,1f,locationListener)
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,60,1f,locationListener)
         }
 
 
@@ -241,7 +241,7 @@ class AddActivity : AppCompatActivity() {
             if(grantResults.size >0){
                 if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
                     // izni aldık konumu alıcaz
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,1,1f,locationListener)
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,60,1f,locationListener)
 
                 }
             }
