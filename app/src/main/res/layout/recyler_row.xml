@@ -1,55 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_gravity="center_horizontal"
     android:layout_height="wrap_content"
-    android:padding="7dp"
-    android:layout_marginBottom="25dp"
-    android:background="@drawable/card_background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    app:cardCornerRadius="10dp"
+    android:backgroundTint="#FFFFFF"
+    android:padding="5dp"
 
-    <ImageView
-        android:id="@+id/imgPlace"
-        android:layout_width="150dp"
-        android:scaleType="centerCrop"
-        android:layout_height="150dp"
-        android:src="@drawable/ic_launcher_background"
-        android:layout_gravity="center"
-        ></ImageView>
+    android:layout_marginBottom="25dp">
 
-    <TextView
-
-        android:id="@+id/txtPlaceName"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        >
 
-        android:layout_alignTop="@+id/imgPlace"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/imgPlace"
-        android:text="Çengelköy Börekçisi"
-        android:textColor="@color/special_black"
-        android:textSize="24sp"
-        android:textStyle="bold|italic"></TextView>
+        <ImageView
+            android:id="@+id/imgPlace"
+            android:layout_width="match_parent"
+            android:scaleType="centerCrop"
+            android:layout_height="250dp"
+            android:src="@drawable/ic_launcher_background"
+            ></ImageView>
 
+        <TextView
 
-
-    <TextView
-        android:id="@+id/txtPlaceAdress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Adres : Üsküdar/Mimar Sinan Mahallesi"
-        android:textColor="@color/special_black"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="25dp"
-        android:layout_alignBottom="@+id/imgPlace"
-
-        android:textSize="16sp"
-        android:layout_toRightOf="@+id/imgPlace"></TextView>
-
+            android:id="@+id/txtPlaceName"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Çengelköy Börekçisi"
+            android:textColor="@color/special_black"
+            android:textSize="24sp"
+            android:layout_below="@+id/imgPlace"
+            android:textStyle="bold|italic"></TextView>
 
 
-</RelativeLayout>
+
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:id="@+id/txtPlaceAdress"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="Adres : Üsküdar/Mimar Sinan Mahallesi"
+            android:textColor="@color/special_black"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/txtPlaceName"
+
+            android:textSize="16sp"
+
+            ></TextView>
+
+    </RelativeLayout>
+    
+
+
+</androidx.cardview.widget.CardView>
