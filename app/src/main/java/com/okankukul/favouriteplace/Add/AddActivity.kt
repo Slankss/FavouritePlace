@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -64,6 +66,8 @@ class AddActivity : AppCompatActivity() {
 
         binding = ActivityAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.txtTakeCamera.visibility = View.VISIBLE
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         locationListener = object : LocationListener
@@ -220,8 +224,10 @@ class AddActivity : AppCompatActivity() {
 
             // gorselUrl = data.data
 
+            binding.txtTakeCamera.visibility = View.GONE
+            binding.imgCamera.scaleType = ImageView.ScaleType.CENTER_CROP
             gorselBitMap = BitmapFactory.decodeFile(gorselYolu) // data?.getParcelableExtra<Bitmap>("data")
-            binding.addPhoto.setImageBitmap(gorselBitMap)
+            binding.imgCamera.setImageBitmap(gorselBitMap)
         }
 
         super.onActivityResult(requestCode, resultCode, data)
