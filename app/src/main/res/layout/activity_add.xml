@@ -7,53 +7,50 @@
     android:background="@drawable/gradient"
     tools:context=".Add.AddActivity">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/courgette"
-        android:text="Mekan Ekle"
-        android:textColor="@color/special_black"
-        android:textSize="34sp"
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="75dp"
+
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginBottom="25dp"
+
+        android:background="@drawable/image_background"
+        android:gravity="center"
+        android:padding="6dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <ImageView
+            android:id="@+id/addPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Fotoğraf Çek"
+            android:scaleType="centerCrop"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:srcCompat="@drawable/camera" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="75dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginBottom="50dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/special_black"
-
-            android:padding="25dp"
-            app:cardCornerRadius="10dp">
-
-            <ImageView
-                android:id="@+id/addPhoto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/camera" />
-        </androidx.cardview.widget.CardView>
+        app:layout_constraintStart_toStartOf="parent">
 
 
         <TextView
@@ -82,43 +79,70 @@
             android:textColorHint="#80292929"
             android:textSize="17sp" />
 
-        <EditText
-            android:id="@+id/editTextPlaceName"
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editTextPlaceNameInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/special_black"
+            app:startIconDrawable="@drawable/ic_place"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:helperText=""
+            app:errorTextColor="#FF0000"
+            app:hintTextColor="@color/special_black"
+            app:errorIconDrawable="@android:drawable/stat_notify_error"
+            app:boxStrokeErrorColor="#FF0000"
+            app:boxCornerRadiusBottomEnd="7dp"
+            app:boxCornerRadiusBottomStart="7dp"
+
+            app:boxCornerRadiusTopEnd="7dp"
+            app:boxCornerRadiusTopStart="7dp"
             android:layout_marginBottom="25dp"
-            android:background="@drawable/text_box"
-            android:ems="10"
-            android:hint="Mekan İsmi"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:textAlignment="center"
-            android:textColorHint="#80292929"
-            android:textSize="16sp" />
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="618dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextPlaceName"
+                android:layout_width="match_parent"
+                android:textColor="@color/special_black"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textColorHighlight="@color/special_orange"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="Mekan ismi" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
 
         <Button
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
             android:background="@drawable/radius_button"
+
+
             android:text="Kaydet"
-
-
             android:textColor="#FFFFFF"
             app:backgroundTint="@color/special_black" />
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/lobster"
+        android:text="Favorilere Ekle"
+        android:textColor="@color/special_black"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_add" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

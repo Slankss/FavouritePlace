@@ -54,9 +54,6 @@ class AddActivity : AppCompatActivity() {
     private lateinit var adres : String;
     private  lateinit var guncelKonum : LatLng
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)
@@ -64,6 +61,9 @@ class AddActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         storage = FirebaseStorage.getInstance()
         fireStore = FirebaseFirestore.getInstance()
+
+        binding = ActivityAddBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         locationListener = object : LocationListener
@@ -100,20 +100,32 @@ class AddActivity : AppCompatActivity() {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,60,1f,locationListener)
         }
 
-
-        binding = ActivityAddBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
         binding.addPhoto.setOnClickListener {
             fotoCek()
         }
 
         binding.btnSave.setOnClickListener {
-            addFavourite()
+            if(check()){
+                addFavourite()
+            }
         }
     }
 
+    fun check() : Boolean{
 
+        var placeName = binding.editTextPlaceName.text.toString().trim()
+
+        if(placeName.isEmpty()){
+
+            binding.editTextPlaceNameInputLayout.error = "Bu alan boş kalamaz!"
+            return false
+        }
+        else{
+            binding.editTextPlaceName.error = null
+        }
+
+        return true
+    }
 
     fun fotoCek(){
 
@@ -148,17 +160,17 @@ class AddActivity : AppCompatActivity() {
         catch (e : IOException){
             println(e.localizedMessage)
         }
-        println(gorselUrl);
-        println(gorselYolu)
 
     }
 
     fun addFavourite(){
         val guncelKullanici = auth.currentUser
 
-        val reference = storage.reference
-        val gorselReference =reference.child("images").child("${gorselIsmi}.jpg")
+        Toast.makeText(applicationContext,"${gorselUrl}",Toast.LENGTH_LONG)
         if(gorselUrl != null){
+
+            val reference = storage.reference
+            val gorselReference =reference.child("images").child("${gorselIsmi}.jpg")
 
             gorselReference.putFile(gorselUrl!!).addOnSuccessListener { taskSnapshot ->
                 var yuklenenGorselReference = FirebaseStorage.getInstance().reference.child("images").child("${gorselIsmi}.jpg")
@@ -188,8 +200,6 @@ class AddActivity : AppCompatActivity() {
                         }.addOnFailureListener { exception ->
                             Toast.makeText(applicationContext,exception.localizedMessage,Toast.LENGTH_LONG).show()
                         }
-
-
                     }
 
                 }.addOnFailureListener { exception ->
@@ -200,7 +210,7 @@ class AddActivity : AppCompatActivity() {
 
         }
         else{
-            Toast.makeText(applicationContext,"Gorsel Boş\n${gorselUrl}",Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext,"Fotoğraf Eklemediniz",Toast.LENGTH_LONG).show()
         }
     }
 

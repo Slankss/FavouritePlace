@@ -29,6 +29,8 @@ class RegisterFragment : Fragment() {
 
     }
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -61,18 +63,8 @@ class RegisterFragment : Fragment() {
             if(text != password && text!!.length >= password.length){
                 binding.paswordConfirmInputLayout.error = "Parolalar aynı değil"
             }
-            else if(text.length == 10){
-                binding.paswordConfirmInputLayout.error = null
-
-
-            }
 
         }
-
-        binding.btnTest.setOnClickListener {
-            binding.paswordConfirmInputLayout.error = null
-        }
-
 
     }
 
