@@ -1,17 +1,13 @@
 package com.okankukul.favouriteplace.Adapter
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.compose.ui.text.capitalize
-import androidx.compose.ui.text.toUpperCase
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
-import com.okankukul.favouriteplace.Edit.EditActivity
 import com.okankukul.favouriteplace.Model.Post
 import com.okankukul.favouriteplace.R
 import com.okankukul.favouriteplace.databinding.RecylerRowBinding
@@ -47,7 +43,7 @@ class RecylerAdapter (val postList: ArrayList<Post>,val mcontext : Context)
             it.uppercase()
         }
         holder.txtPlaceAdress.text = postList.get(position).location
-        
+
         auth.currentUser?.let {
             if(postList.get(position).username == it.displayName.toString()){
                 holder.btnGoEditPage.visibility = View.VISIBLE

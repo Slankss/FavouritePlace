@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
 
-    <item
-        android:id="@+id/logout"
-        android:title="Çıkış Yap">
+    <item android:id="@+id/home"
+        android:icon="@drawable/ic_home_square"
+        android:title="Ana Sayfa">
+
     </item>
-    <item android:id="@+id/addPlace"
+    <item android:id="@+id/add"
+        android:icon="@drawable/add"
         android:title="Ekle"></item>
+
+
+
 
 </menu>

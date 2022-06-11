@@ -1,4 +1,4 @@
-package com.okankukul.favouriteplace.Add
+package com.okankukul.favouriteplace.Home
 
 import android.Manifest
 import android.app.Activity
@@ -7,13 +7,11 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.ImageDecoder
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
