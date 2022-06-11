@@ -51,20 +51,8 @@ class RegisterFragment : Fragment() {
 
         var password = ""
 
-        binding.passwordEditText.doOnTextChanged { text, start, before, count ->
-           password = binding.passwordEditText.text.toString()
-        }
 
 
-
-        binding.passwordConfirmEditText.doOnTextChanged { text, start, before, count ->
-
-
-            if(text != password && text!!.length >= password.length){
-                binding.paswordConfirmInputLayout.error = "Parolalar aynı değil"
-            }
-
-        }
 
     }
 
@@ -112,7 +100,7 @@ class RegisterFragment : Fragment() {
                 if(currentUser != null){
                     currentUser.updateProfile(profilGuncellemesiIsteği).addOnCompleteListener { task ->
                         if(task.isSuccessful){
-                            Toast.makeText(context,"Profil Kullanıcı Adı Eklendi", Toast.LENGTH_LONG).show()
+                            //Toast.makeText(context,"Profil Kullanıcı Adı Eklendi", Toast.LENGTH_LONG).show()
                         }
                     }
                 }

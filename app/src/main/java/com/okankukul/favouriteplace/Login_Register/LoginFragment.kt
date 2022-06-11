@@ -41,6 +41,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         var currentUser = auth.currentUser
         if(currentUser !=null){
             activity?.let {

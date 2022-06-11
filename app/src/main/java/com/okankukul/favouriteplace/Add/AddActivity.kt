@@ -83,7 +83,7 @@ class AddActivity : AppCompatActivity() {
                     val adresListesi = geoCoder.getFromLocation(guncelKonum.latitude,guncelKonum.longitude,1)
                     if(adresListesi.size >0)
                     {
-                        adres +=adresListesi.get(0).thoroughfare.toString() + "/"+ adresListesi.get(0).subThoroughfare.toString()
+                        adres +=adresListesi.get(0).countryName.toString()+"/"+adresListesi.get(0).adminArea.toString()+"/"+adresListesi.get(0).thoroughfare.toString() + "/"+ adresListesi.get(0).subThoroughfare.toString()
                         binding.txtLocation.text = adres
                     }
                 }

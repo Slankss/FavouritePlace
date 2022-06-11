@@ -24,36 +24,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-
-            >
-
-            <ImageView
-                android:id="@+id/imgCamera"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleType="center"
-                android:src="@drawable/ic_camera"
-                android:visibility="visible"
-
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"></ImageView>
-
-            <TextView
-                android:id="@+id/txtTakeCamera"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/imgCamera"
-                android:layout_marginLeft="25dp"
-                android:text="Fotoğraf Çek"
-                android:textColor="@color/special_black"
-                android:textSize="18sp"></TextView>
-
-        </RelativeLayout>
-
+        <ImageView
+            android:id="@+id/imgCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"></ImageView>
 
     </androidx.cardview.widget.CardView>
 
@@ -70,20 +48,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent">
 
-
-        <TextView
-            android:id="@+id/txtLocationInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="5dp"
-            android:text="Mevcut Konum"
-            android:textAllCaps="false"
-            android:textColor="@color/special_black"
-            android:textColorHint="#80292929"
-            android:textSize="17sp"
-
-            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtLocation"
@@ -132,16 +96,29 @@
 
 
         <Button
-            android:id="@+id/btnSave"
+            android:id="@+id/btnEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
             android:background="@drawable/radius_button"
+            android:drawableEnd="@drawable/ic_btn_edit"
 
-
-            android:text="Kaydet"
+            android:text="Düzenle"
             android:textColor="#FFFFFF"
             app:backgroundTint="@color/special_black" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/radius_button"
+            app:backgroundTint="@color/special_blue"
+            android:drawableEnd="@drawable/delete"
+
+            android:text="Sil"
+            android:textColor="#FFFFFF"
+             />
 
     </LinearLayout>
 
@@ -151,7 +128,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:fontFamily="@font/lobster"
-        android:text="Favorilere Ekle"
+        android:text="Düzenle"
         android:textColor="@color/special_black"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"

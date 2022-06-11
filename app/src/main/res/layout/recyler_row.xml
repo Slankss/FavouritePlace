@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="10dp"
+    app:cardCornerRadius="5dp"
     android:backgroundTint="#FFFFFF"
     android:padding="5dp"
 
@@ -13,30 +13,69 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txtSharedNameInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Paylaşım Sahibi: "
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/special_black"
+            android:textStyle="bold">
+
+        </TextView>
+
+        <ImageView
+            android:id="@+id/btnGoEditPage"
+
+            android:layout_marginRight="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/txtSharedNameInfo"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_edit2"></ImageView>
+
+        <TextView
+            android:id="@+id/txtSharedName"
+            android:layout_width="wrap_content"
+            android:layout_toRightOf="@id/txtSharedNameInfo"
+            android:layout_marginLeft="2dp"
+            android:layout_alignBottom="@id/txtSharedNameInfo"
+            android:layout_height="wrap_content"
+            android:text="Okankkl"
+            android:textSize="16sp"
+            android:textColor="@color/special_black"
+
+            >
+
+        </TextView>
 
         <ImageView
             android:id="@+id/imgPlace"
             android:layout_width="match_parent"
             android:scaleType="centerCrop"
+            android:layout_below="@id/txtSharedNameInfo"
             android:layout_height="250dp"
+            android:layout_marginTop="5dp"
             android:src="@drawable/ic_launcher_background"
             ></ImageView>
+
 
         <TextView
 
             android:id="@+id/txtPlaceName"
             android:layout_width="match_parent"
-            android:textAlignment="center"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_below="@+id/imgPlace"
+            android:layout_marginTop="2dp"
             android:text="Çengelköy Börekçisi"
+            android:textAlignment="center"
             android:textColor="@color/special_black"
             android:textSize="24sp"
-            android:layout_below="@+id/imgPlace"
             android:textStyle="bold|italic"></TextView>
-
 
 
         <TextView

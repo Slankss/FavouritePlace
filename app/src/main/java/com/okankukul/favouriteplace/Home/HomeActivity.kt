@@ -25,6 +25,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var fireStore : FirebaseFirestore
     private lateinit var recyclerViewAdapter : RecylerAdapter
 
+
     var postList = ArrayList<Post>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,9 +42,8 @@ class HomeActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recylerView.layoutManager = layoutManager
-        recyclerViewAdapter= RecylerAdapter(postList)
+        recyclerViewAdapter= RecylerAdapter(postList,this)
         binding.recylerView.adapter = recyclerViewAdapter
-
 
 
     }
