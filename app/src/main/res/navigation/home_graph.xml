@@ -11,16 +11,28 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_addFragment"
-            app:destination="@id/addFragment" />
+            android:id="@+id/action_homeFragment_to_editFragment"
+            app:destination="@id/editFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
-        android:id="@+id/addFragment"
-        android:name="com.okankukul.favouriteplace.Home.AddFragment"
-        android:label="fragment_add"
-        tools:layout="@layout/fragment_add" >
+        android:id="@+id/editFragment"
+        android:name="com.okankukul.favouriteplace.Home.EditFragment"
+        android:label="fragment_edit"
+        tools:layout="@layout/fragment_edit" >
         <action
-            android:id="@+id/action_addFragment_to_homeFragment"
+            android:id="@+id/action_editFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.okankukul.favouriteplace.Home.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

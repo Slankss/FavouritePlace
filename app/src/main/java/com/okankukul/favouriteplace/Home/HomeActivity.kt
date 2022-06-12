@@ -1,5 +1,6 @@
 package com.okankukul.favouriteplace.Home
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -28,8 +29,11 @@ class HomeActivity : AppCompatActivity() {
 
         bottom.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.home -> loadFragment(HomeFragment())
-                R.id.add -> loadFragment(AddFragment(this))
+                R.id.menu_home -> loadFragment(HomeFragment())
+                R.id.menu_add -> {
+                    startActivity(Intent(applicationContext,AddActivity::class.java))
+                }
+                R.id.menu_profile -> loadFragment(ProfileFragment())
             }
             true
         }
