@@ -26,6 +26,7 @@ class RecylerAdapter (val postList: ArrayList<Post>,val mcontext : Context)
         var txtPlaceName : TextView = itemView.findViewById(R.id.txtPlaceName)
         var txtPlaceAdress : TextView = itemView.findViewById(R.id.txtPlaceAdress)
         var btnGoEditPage : ImageView = itemView.findViewById(R.id.btnGoEditPage)
+        var txtSharedName : TextView = itemView.findViewById(R.id.txtSharedName)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostHolder {
@@ -43,7 +44,9 @@ class RecylerAdapter (val postList: ArrayList<Post>,val mcontext : Context)
             it.uppercase()
         }
         holder.txtPlaceAdress.text = postList.get(position).location
+        holder.txtSharedName.text = postList.get(position).username
 
+        /*
         auth.currentUser?.let {
             if(postList.get(position).username == it.displayName.toString()){
                 holder.btnGoEditPage.visibility = View.VISIBLE
@@ -55,7 +58,7 @@ class RecylerAdapter (val postList: ArrayList<Post>,val mcontext : Context)
             else{
                 holder.btnGoEditPage.visibility = View.GONE
             }
-        }
+        }*/
 
        Picasso.get().load(postList.get(position).gorselUrl).into(holder.imgPlace)
         // indirme işlemi

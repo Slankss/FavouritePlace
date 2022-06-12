@@ -15,41 +15,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/txtSharedNameInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Paylaşım Sahibi: "
-            android:textSize="16sp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/special_black"
-            android:textStyle="bold">
-
-        </TextView>
 
         <ImageView
             android:id="@+id/btnGoEditPage"
-
+            android:visibility="gone"
             android:layout_marginRight="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/txtSharedNameInfo"
+            android:layout_alignBottom="@id/txtSharedName"
             android:layout_alignParentEnd="true"
             android:src="@drawable/ic_edit2"></ImageView>
 
         <TextView
             android:id="@+id/txtSharedName"
             android:layout_width="wrap_content"
-            android:layout_toRightOf="@id/txtSharedNameInfo"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="2dp"
-            android:layout_alignBottom="@id/txtSharedNameInfo"
+            android:textStyle="bold"
+            android:layout_alignParentStart="true"
             android:layout_height="wrap_content"
-            android:text="Okankkl"
+            android:text="username"
             android:textSize="16sp"
-            android:textColor="@color/special_black"
-
-            >
+            android:textColor="@color/special_black">
 
         </TextView>
 
@@ -57,7 +46,7 @@
             android:id="@+id/imgPlace"
             android:layout_width="match_parent"
             android:scaleType="centerCrop"
-            android:layout_below="@id/txtSharedNameInfo"
+            android:layout_below="@id/txtSharedName"
             android:layout_height="250dp"
             android:layout_marginTop="5dp"
             android:src="@drawable/ic_launcher_background"

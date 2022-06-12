@@ -36,6 +36,8 @@ class ProfileFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         fireStore = FirebaseFirestore.getInstance()
 
+
+
         var currentUser = auth.currentUser
         currentUserEmail =""
         currentUserName = ""
@@ -50,6 +52,8 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         getData(view)
+
+        binding.txtProfileName.text = currentUserName
 
         val layoutManager = LinearLayoutManager(view.context)
         binding.myRecylerView.layoutManager = layoutManager
