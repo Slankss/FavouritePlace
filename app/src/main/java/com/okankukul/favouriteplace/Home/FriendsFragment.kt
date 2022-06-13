@@ -5,8 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import com.okankukul.favouriteplace.Adapter.FriendsRecylerAdapter
+import com.okankukul.favouriteplace.Adapter.RecylerAdapter
+import com.okankukul.favouriteplace.Model.Post
 import com.okankukul.favouriteplace.R
 import com.okankukul.favouriteplace.databinding.FragmentFriendsBinding
 import com.okankukul.favouriteplace.databinding.FragmentHomeBinding
@@ -17,6 +22,10 @@ class FriendsFragment : Fragment() {
     private lateinit var binding : FragmentFriendsBinding
     private lateinit var auth : FirebaseAuth
     private lateinit var fireStore : FirebaseFirestore
+
+    private lateinit var recyclerViewAdapter : FriendsRecylerAdapter
+
+    private var friendList = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +38,13 @@ class FriendsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+        getFriends(view)
+
+
+        val layoutManager = LinearLayoutManager(view.context)
+        binding.recyclerView.layoutManager = layoutManager
+        recyclerViewAdapter= FriendsRecylerAdapter(friendList,view.context)
+        binding.recyclerView.adapter = recyclerViewAdapter
 
     }
 
@@ -40,6 +56,48 @@ class FriendsFragment : Fragment() {
 
 
         return binding.root
+    }
+
+    fun getFriends(view : View){
+
+        var currentUser = auth.currentUser
+        var currentUsername=""
+        if(currentUser != null){
+            currentUsername = currentUser.displayName.toString()
+        }
+
+        // DESCENDING -> DÜŞEN   ASCENDING -> YUKSELEN
+        fireStore.collection("Profile").whereEqualTo("username",currentUsername).addSnapshotListener { snapshot, exception ->
+            if(exception != null)
+            {
+                println(exception.localizedMessage)
+            }
+            else
+            {
+                if(snapshot != null)
+                {
+                    if(!snapshot.isEmpty) // boş değilse
+                    {
+                        val documents = snapshot.documents
+
+
+                        friendList.clear()
+
+                        for(document in documents)
+                        {
+                            var friendUsernameList = document.get("friends") as ArrayList<String>
+
+                            for(item in friendUsernameList){
+                                friendList.add(item)
+                            }
+                        }
+                        //println("getFriends:"+friendList.get(1))
+                        recyclerViewAdapter.notifyDataSetChanged() // verileri yenile demek
+                    }
+                }
+            }
+        }
+
     }
 
 
