@@ -14,6 +14,11 @@
         android:title="Ekle"></item>
 
     <item
+        android:id="@+id/menu_friends"
+        android:title="Arkadaşlar"
+        android:icon="@drawable/ic_friends"
+        ></item>
+    <item
         android:id="@+id/menu_profile"
         android:icon="@drawable/ic_user"
         android:title="Profil"

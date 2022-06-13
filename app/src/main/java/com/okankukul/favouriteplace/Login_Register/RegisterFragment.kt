@@ -10,6 +10,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.firestore.FirebaseFirestore
 import com.okankukul.favouriteplace.R
 import com.okankukul.favouriteplace.databinding.FragmentRegisterBinding
 
@@ -18,6 +19,7 @@ class RegisterFragment : Fragment() {
 
     private lateinit var binding : FragmentRegisterBinding
     private lateinit var auth : FirebaseAuth
+    private lateinit var fireStore : FirebaseFirestore
     private var email = ""
     private var password = ""
     private var password_again = ""
@@ -38,6 +40,7 @@ class RegisterFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentRegisterBinding.inflate(layoutInflater)
         auth = FirebaseAuth.getInstance()
+        fireStore = FirebaseFirestore.getInstance()
 
         return binding.root
     }
@@ -97,17 +100,33 @@ class RegisterFragment : Fragment() {
                     displayName = username
                 }
 
+                val profileHashMap = hashMapOf<String,Any>()
+                var friendList = arrayListOf<String>()
+                profileHashMap.put("email",email)
+                profileHashMap.put("username",username)
+                profileHashMap.put("password",password)
+                profileHashMap.put("friends",friendList)
+
+                fireStore.collection("Profile").add(profileHashMap).addOnCompleteListener { task ->
+                    if(task.isSuccessful){
+
+                    }
+
+                }.addOnFailureListener { exception ->
+                    println(exception.localizedMessage)
+                }
+
                 if(currentUser != null){
                     currentUser.updateProfile(profilGuncellemesiIsteği).addOnCompleteListener { task ->
                         if(task.isSuccessful){
-                            //Toast.makeText(context,"Profil Kullanıcı Adı Eklendi", Toast.LENGTH_LONG).show()
+
                         }
                     }
                 }
                 findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
             }
         }.addOnFailureListener { exception ->
-            Toast.makeText(context,exception.localizedMessage, Toast.LENGTH_LONG).show()
+            println(exception.localizedMessage)
         }
 
     }

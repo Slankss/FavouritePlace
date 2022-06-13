@@ -34,6 +34,7 @@ class HomeActivity : AppCompatActivity() {
                     startActivity(Intent(applicationContext,AddActivity::class.java))
                 }
                 R.id.menu_profile -> loadFragment(ProfileFragment())
+                R.id.menu_friends -> loadFragment(FriendsFragment())
             }
             true
         }
