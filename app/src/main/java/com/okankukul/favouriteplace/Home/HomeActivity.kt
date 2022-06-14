@@ -6,9 +6,11 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.okankukul.favouriteplace.Add.AddActivity
+import com.okankukul.favouriteplace.Home.Friends.FriendsFragment
+import com.okankukul.favouriteplace.Home.Home.HomeFragment
+import com.okankukul.favouriteplace.Home.Profile.ProfileFragment
 import com.okankukul.favouriteplace.R
-import com.okankukul.favouriteplace.databinding.ActivityHomeBinding
-import javax.annotation.meta.When
 
 
 class HomeActivity : AppCompatActivity() {
@@ -31,7 +33,7 @@ class HomeActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.menu_home -> loadFragment(HomeFragment())
                 R.id.menu_add -> {
-                    startActivity(Intent(applicationContext,AddActivity::class.java))
+                    startActivity(Intent(applicationContext, AddActivity::class.java))
                 }
                 R.id.menu_profile -> loadFragment(ProfileFragment())
                 R.id.menu_friends -> loadFragment(FriendsFragment())

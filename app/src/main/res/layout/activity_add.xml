@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
     android:visibility="visible"
-    tools:context=".Home.AddActivity">
+    tools:context=".Add.AddActivity">
 
 
     <androidx.cardview.widget.CardView

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.okankukul.favouriteplace.Home.HomeFragment"
+        android:name="com.okankukul.favouriteplace.Home.Home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -16,10 +16,13 @@
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_friendsFragment2"
+            app:destination="@id/friendsFragment2" />
     </fragment>
     <fragment
         android:id="@+id/editFragment"
-        android:name="com.okankukul.favouriteplace.Home.EditFragment"
+        android:name="com.okankukul.favouriteplace.Home.Edit.EditFragment"
         android:label="fragment_edit"
         tools:layout="@layout/fragment_edit" >
         <action
@@ -28,11 +31,26 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.okankukul.favouriteplace.Home.ProfileFragment"
+        android:name="com.okankukul.favouriteplace.Home.Profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_profileFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_friendsFragment2"
+            app:destination="@id/friendsFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/friendsFragment2"
+        android:name="com.okankukul.favouriteplace.Home.Friends.FriendsFragment"
+        android:label="fragment_friends"
+        tools:layout="@layout/fragment_friends" >
+        <action
+            android:id="@+id/action_friendsFragment2_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_friendsFragment2_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 </navigation>

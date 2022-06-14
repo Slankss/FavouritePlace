@@ -1,4 +1,4 @@
-package com.okankukul.favouriteplace.Home
+package com.okankukul.favouriteplace.Home.Edit
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

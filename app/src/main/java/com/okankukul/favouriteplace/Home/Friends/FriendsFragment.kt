@@ -1,20 +1,18 @@
-package com.okankukul.favouriteplace.Home
+package com.okankukul.favouriteplace.Home.Friends
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.okankukul.favouriteplace.Adapter.FriendsRecylerAdapter
-import com.okankukul.favouriteplace.Adapter.RecylerAdapter
-import com.okankukul.favouriteplace.Model.Post
 import com.okankukul.favouriteplace.R
 import com.okankukul.favouriteplace.databinding.FragmentFriendsBinding
-import com.okankukul.favouriteplace.databinding.FragmentHomeBinding
 
 
 class FriendsFragment : Fragment() {
@@ -43,8 +41,12 @@ class FriendsFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(view.context)
         binding.recyclerView.layoutManager = layoutManager
-        recyclerViewAdapter= FriendsRecylerAdapter(friendList,view.context)
+        recyclerViewAdapter= FriendsRecylerAdapter(friendList,view.context,R.string.friend_list.toString())
         binding.recyclerView.adapter = recyclerViewAdapter
+
+        binding.btnGoAddFriend.setOnClickListener {
+            startActivity(Intent(view.context,FriendsAddActivity::class.java))
+        }
 
     }
 
@@ -91,7 +93,7 @@ class FriendsFragment : Fragment() {
                                 friendList.add(item)
                             }
                         }
-                        //println("getFriends:"+friendList.get(1))
+
                         recyclerViewAdapter.notifyDataSetChanged() // verileri yenile demek
                     }
                 }

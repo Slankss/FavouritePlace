@@ -5,8 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -16,10 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FavouritePlace">
         <activity
-            android:name=".Home.EditActivity"
+            android:name=".Home.Friends.FriendsAddActivity"
             android:exported="false" />
         <activity
-            android:name=".Home.AddActivity"
+            android:name=".Home.Edit.EditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Add.AddActivity"
             android:exported="false" />
         <activity
             android:name=".Home.HomeActivity"

@@ -1,4 +1,4 @@
-package com.okankukul.favouriteplace.Home
+package com.okankukul.favouriteplace.Add
 
 import android.Manifest
 import android.app.Activity

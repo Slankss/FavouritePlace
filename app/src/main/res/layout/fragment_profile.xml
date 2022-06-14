@@ -5,7 +5,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home.ProfileFragment">
+    tools:context=".Home.Profile.ProfileFragment">
 
     <ImageView
         android:id="@+id/imageView3"

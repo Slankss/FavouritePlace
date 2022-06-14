@@ -11,5 +11,9 @@
     <string name="login_failed">"Login failed"</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="friend_list">friend_list</string>
+    <string name="add_friend">add_friend</string>
+    <string name="add_request">add_request</string>
+    <string name="delete_request">delete_request</string>
 
 </resources>

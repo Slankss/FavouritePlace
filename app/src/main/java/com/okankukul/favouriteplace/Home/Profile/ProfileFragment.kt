@@ -1,48 +1,70 @@
-package com.okankukul.favouriteplace.Home
+package com.okankukul.favouriteplace.Home.Profile
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.okankukul.favouriteplace.Adapter.RecylerAdapter
+import com.okankukul.favouriteplace.Login_Register.LoginActivity
 import com.okankukul.favouriteplace.Model.Post
-import com.okankukul.favouriteplace.R
-import com.okankukul.favouriteplace.databinding.ActivityHomeBinding
-import com.okankukul.favouriteplace.databinding.FragmentHomeBinding
-import com.okankukul.favouriteplace.databinding.FragmentLoginBinding
+import com.okankukul.favouriteplace.databinding.FragmentProfileBinding
 
-class HomeFragment : Fragment() {
 
-    private lateinit var binding : FragmentHomeBinding
+class ProfileFragment : Fragment() {
+
+    private lateinit var binding : FragmentProfileBinding
     private lateinit var auth : FirebaseAuth
     private lateinit var fireStore : FirebaseFirestore
     private lateinit var recyclerViewAdapter : RecylerAdapter
+    var currentUserEmail =""
+    var currentUserName = ""
 
     var postList = ArrayList<Post>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        auth = FirebaseAuth.getInstance()
+        fireStore = FirebaseFirestore.getInstance()
+
+
+
+        var currentUser = auth.currentUser
+        currentUserEmail =""
+        currentUserName = ""
+        if(currentUser != null){
+            currentUserEmail = currentUser.email.toString()
+            currentUserName = currentUser.displayName.toString()
+        }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        auth = FirebaseAuth.getInstance()
-        fireStore = FirebaseFirestore.getInstance()
-
         getData(view)
 
+        binding.txtProfileName.text = currentUserName
 
         val layoutManager = LinearLayoutManager(view.context)
-        binding.recylerView.layoutManager = layoutManager
+        binding.myRecylerView.layoutManager = layoutManager
         recyclerViewAdapter= RecylerAdapter(postList,view.context)
-        binding.recylerView.adapter = recyclerViewAdapter
+        binding.myRecylerView.adapter = recyclerViewAdapter
+
+        binding.btnLogout.setOnClickListener {
+            auth.signOut()
+            activity?.let {
+                startActivity(Intent(it.applicationContext,LoginActivity::class.java))
+                it.finish()
+            }
+
+        }
 
     }
 
@@ -51,17 +73,16 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentHomeBinding.inflate(layoutInflater)
+        binding = FragmentProfileBinding.inflate(layoutInflater)
         auth = FirebaseAuth.getInstance()
 
         return binding.root
     }
-
     fun getData(view : View){
 
         // DESCENDING -> DÜŞEN   ASCENDING -> YUKSELEN
-        fireStore.collection("Post").orderBy("date", Query.Direction.DESCENDING
 
+        fireStore.collection("Post").whereEqualTo("userEmail",currentUserEmail).orderBy("date", Query.Direction.DESCENDING
 
         ).addSnapshotListener { snapshot, exception ->
             if(exception != null)
@@ -96,6 +117,7 @@ class HomeFragment : Fragment() {
         }
 
     }
+
 
 
 }
