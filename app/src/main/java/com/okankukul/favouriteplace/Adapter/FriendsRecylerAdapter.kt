@@ -17,13 +17,12 @@ import com.okankukul.favouriteplace.databinding.RecyleerFriendsListBinding
 import com.okankukul.favouriteplace.databinding.RecylerRowBinding
 import com.squareup.picasso.Picasso
 
-class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : Context,val key : String)
-    : RecyclerView.Adapter<FriendsRecylerAdapter.PostHolder>()
+class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : Context,val key : String,
+    var requestList : ArrayList<String>) : RecyclerView.Adapter<FriendsRecylerAdapter.PostHolder>()
 {
     private lateinit var binding: RecyleerFriendsListBinding
     private lateinit var auth : FirebaseAuth
     private lateinit var fireStore : FirebaseFirestore
-    private var requestList = ArrayList<String>()
     private var currentUsername=""
 
     class PostHolder(itemView : View) : RecyclerView.ViewHolder(itemView)  {
@@ -43,15 +42,11 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
         auth = FirebaseAuth.getInstance()
         fireStore = FirebaseFirestore.getInstance()
 
-        checkFriendRequest()
-
         var currentUser = auth.currentUser
 
         if(currentUser != null){
             currentUsername = currentUser.displayName.toString()
         }
-
-
         return PostHolder(view)
     }
 
@@ -75,17 +70,14 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
                 holder.btnFriendDelete.setTextColor(Color.White.hashCode())
 
                 request_id=R.string.add_request
-
             }
 
             holder.btnFriendDelete.setOnClickListener {
                 if(request_id == R.string.add_request){
                     sendFriendRequest(friendList.get(position))
-
                 }
                 else if(request_id == R.string.delete_request){
                     deleteRequest(friendList.get(position))
-
                 }
             }
         }
@@ -116,6 +108,7 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
             fireStore.collection("FriendRequests").add(friendRequestsHashMap).addOnSuccessListener { task ->
                 if(task != null){
                     Toast.makeText(mcontext.applicationContext,"İstek Gönderildi", Toast.LENGTH_SHORT).show()
+                    requestList.add(sendToUsername)
                     this.notifyDataSetChanged()
                 }
 
@@ -124,33 +117,6 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
             }
         }
 
-
-    }
-
-    fun checkFriendRequest(){
-
-        // DESCENDING -> DÜŞEN   ASCENDING -> YUKSELEN
-        fireStore.collection("FriendRequests").whereEqualTo("senderUsername",currentUsername)
-            .addSnapshotListener { snapshot, exception ->
-
-                if(exception != null)
-                {
-                    println(exception.localizedMessage)
-                }
-                else{
-                    if(snapshot != null){
-                        val documents = snapshot.documents
-
-                        requestList.clear()
-                        for(document in documents){
-                            var sendToUsername= document.get("sendToUsername") as String
-                            requestList.add(sendToUsername)
-                        }
-
-                    }
-                }
-
-            }
 
     }
 

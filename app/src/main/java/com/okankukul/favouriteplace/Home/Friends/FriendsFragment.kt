@@ -35,13 +35,12 @@ class FriendsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         getFriends(view)
 
-
+        val emptyList = ArrayList<String>()
         val layoutManager = LinearLayoutManager(view.context)
         binding.recyclerView.layoutManager = layoutManager
-        recyclerViewAdapter= FriendsRecylerAdapter(friendList,view.context,R.string.friend_list.toString())
+        recyclerViewAdapter= FriendsRecylerAdapter(friendList,view.context,R.string.friend_list.toString(),emptyList)
         binding.recyclerView.adapter = recyclerViewAdapter
 
         binding.btnGoAddFriend.setOnClickListener {

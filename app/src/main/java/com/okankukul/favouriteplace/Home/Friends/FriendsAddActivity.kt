@@ -35,9 +35,11 @@ class FriendsAddActivity : AppCompatActivity() {
             currentUsername = currentUser.displayName.toString()
         }
 
+        checkFriendRequest()
+
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        recyclerViewAdapter= FriendsRecylerAdapter(userList,this,R.string.add_friend.toString())
+        recyclerViewAdapter= FriendsRecylerAdapter(userList,this,R.string.add_friend.toString(),requestList)
         binding.recyclerView.adapter = recyclerViewAdapter
 
 
@@ -47,6 +49,9 @@ class FriendsAddActivity : AppCompatActivity() {
 
             if(check()){
                 findFriend()
+            }else{
+                userList.clear()
+                recyclerViewAdapter.notifyDataSetChanged()
             }
 
         }
@@ -157,38 +162,23 @@ class FriendsAddActivity : AppCompatActivity() {
     fun checkFriendRequest(){
 
         // DESCENDING -> DÜŞEN   ASCENDING -> YUKSELEN
-        fireStore.collection("FriendRequests").whereEqualTo("senderUsername",currentUsername).addSnapshotListener { snapshot, exception ->
+        fireStore.collection("FriendRequests").whereEqualTo("senderUsername",currentUsername).get()
+            .addOnSuccessListener { documents ->
+                if(documents != null){
 
+                    var documents =documents.documents
 
-            if(exception != null)
-            {
-                println(exception.localizedMessage)
-            }
+                    requestList.clear()
+                    for(item in documents){
 
-            else
-            {
-
-                if(snapshot != null)
-                {
-                    if(!snapshot.isEmpty) // boş değilse
-                    {
-
-                        val documents = snapshot.documents
-
-
-                        requestList.clear()
-                        for(document in documents)
-                        {
-
-                            var sendToUsername= document.get("sendToUsername") as String
-                            requestList.add(sendToUsername)
-                        }
-
+                        var sendToUsername = item.get("sendToUsername") as String
+                        requestList.add(sendToUsername)
 
                     }
+                    recyclerViewAdapter.notifyDataSetChanged()
                 }
             }
-        }
+
 
     }
 }
