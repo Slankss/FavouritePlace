@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -44,7 +46,12 @@ class FriendsFragment : Fragment() {
         binding.recyclerView.adapter = recyclerViewAdapter
 
         binding.btnGoAddFriend.setOnClickListener {
-            startActivity(Intent(view.context,FriendsAddActivity::class.java))
+            activity?.let {
+                val transaction = it.supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.navHost,FriendsAddFragment())
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
         }
 
     }
@@ -54,7 +61,6 @@ class FriendsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentFriendsBinding.inflate(layoutInflater)
-
 
         return binding.root
     }

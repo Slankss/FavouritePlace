@@ -1,17 +1,21 @@
 package com.okankukul.favouriteplace.Home.Friends
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.okankukul.favouriteplace.Adapter.FriendsRecylerAdapter
 import com.okankukul.favouriteplace.R
-import com.okankukul.favouriteplace.databinding.ActivityFriendsAddBinding
+import com.okankukul.favouriteplace.databinding.FragmentFriendsAddBinding
 
-class FriendsAddActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityFriendsAddBinding
+class FriendsAddFragment : Fragment() {
+
+    private lateinit var binding : FragmentFriendsAddBinding
     private lateinit var auth : FirebaseAuth
     private lateinit var fireStore : FirebaseFirestore
     private var findUsername = ""
@@ -24,11 +28,13 @@ class FriendsAddActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityFriendsAddBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
         auth = FirebaseAuth.getInstance()
         fireStore = FirebaseFirestore.getInstance()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
 
         var currentUser = auth.currentUser
         if(currentUser != null){
@@ -37,9 +43,9 @@ class FriendsAddActivity : AppCompatActivity() {
 
         checkFriendRequest()
 
-        val layoutManager = LinearLayoutManager(this)
+        val layoutManager = LinearLayoutManager(view.context)
         binding.recyclerView.layoutManager = layoutManager
-        recyclerViewAdapter= FriendsRecylerAdapter(userList,this,R.string.add_friend.toString(),requestList)
+        recyclerViewAdapter= FriendsRecylerAdapter(userList,view.context,R.string.add_friend.toString(),requestList)
         binding.recyclerView.adapter = recyclerViewAdapter
 
 
@@ -56,9 +62,6 @@ class FriendsAddActivity : AppCompatActivity() {
 
         }
 
-
-
-
     }
 
     fun check() : Boolean{
@@ -73,6 +76,16 @@ class FriendsAddActivity : AppCompatActivity() {
         }
 
         return true
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        binding = FragmentFriendsAddBinding.inflate(layoutInflater)
+
+        return binding.root
     }
 
     fun findFriend(){
@@ -181,4 +194,6 @@ class FriendsAddActivity : AppCompatActivity() {
 
 
     }
+
+
 }
