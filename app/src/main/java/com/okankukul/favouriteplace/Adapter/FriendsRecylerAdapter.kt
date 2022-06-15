@@ -60,11 +60,7 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
         if(key == R.string.add_friend.toString()){
 
             var request_id=0
-            checkFriendRequest()
-            for(item in requestList){
-                println(item)
-            }
-            println("===============")
+
 
             if(requestList.contains(friendList.get(position))){
                 holder.btnFriendDelete.text = "İsteği geri çek"
@@ -155,7 +151,7 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
                 }
 
             }
-        
+
     }
 
     fun deleteRequest(sendToUsername : String){
