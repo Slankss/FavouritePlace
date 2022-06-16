@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.compose.ui.graphics.Color
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.okankukul.favouriteplace.R
 import com.okankukul.favouriteplace.databinding.RecyleerFriendsListBinding
@@ -26,7 +28,7 @@ class FriendRequestAdapter (var requestList : ArrayList<String>, val mcontext : 
 
         var txtSenderName: TextView = itemView.findViewById(R.id.txtSenderName)
         var btnAccept : ImageView = itemView.findViewById(R.id.btnAccept)
-
+        var btnCancel : ImageView = itemView.findViewById(R.id.btnCancel)
     }
 
 
@@ -53,11 +55,105 @@ class FriendRequestAdapter (var requestList : ArrayList<String>, val mcontext : 
         }
         else{
             holder.btnAccept.visibility = View.VISIBLE
+
+            holder.btnCancel.setOnClickListener {
+                cancelRequest(requestList.get(position))
+            }
+
+            holder.btnAccept.setOnClickListener {
+                acceptRequest(requestList.get(position))
+            }
         }
 
     }
 
     override fun getItemCount(): Int {
         return requestList.size
+    }
+
+    fun cancelRequest(senderUsername : String){
+        var id = ""
+        fireStore.collection("FriendRequests").whereEqualTo("sendToUsername",currentUsername)
+            .whereEqualTo("senderUsername",senderUsername)
+            .get().addOnSuccessListener {   document ->
+                if(document != null)
+                {
+                    for (item in document){
+                        id = item.id
+
+                    }
+
+                    if(!id.isEmpty()){
+                        fireStore.collection("FriendRequests").document(id).delete().addOnCompleteListener {
+                            if(it.isSuccessful){
+                                Toast.makeText(mcontext,"İstek reddedildi", Toast.LENGTH_SHORT).show()
+                                requestList.remove(senderUsername)
+                                this.notifyDataSetChanged()
+                            }
+                        }.addOnFailureListener {
+                            println(it.localizedMessage)
+                        }
+                    }
+                }
+            }
+    }
+
+    fun acceptRequest(senderUsername : String){
+
+        var id = ""
+        fireStore.collection("FriendRequests").whereEqualTo("senderUsername",senderUsername)
+            .whereEqualTo("sendToUsername",currentUsername)
+            .get().addOnSuccessListener {   document ->
+                if(document != null)
+                {
+                    for (item in document){
+                        id = item.id
+                    }
+                    if(!id.isEmpty()){
+                        fireStore.collection("FriendRequests").document(id).delete().addOnCompleteListener {
+                            if(it.isSuccessful){
+                                requestList.remove(senderUsername)
+
+                                fireStore.collection("Profile").whereEqualTo("username",currentUsername).get()
+                                    .addOnSuccessListener { documents ->
+                                        if(documents != null){
+                                            var sendToId =""
+                                            var documents = documents.documents
+                                            for(item in documents){
+                                                sendToId = item.id
+                                            }
+                                            fireStore.collection("Profile").document(sendToId).update("friends",FieldValue.arrayRemove(senderUsername)).addOnCompleteListener { task ->
+                                                if (task.isSuccessful){
+                                                    fireStore.collection("Profile").document(sendToId).update("friends",
+                                                        FieldValue.arrayUnion(senderUsername))
+                                                }
+                                            }
+                                        }
+                                    }
+                                fireStore.collection("Profile").whereEqualTo("username",senderUsername).get()
+                                    .addOnSuccessListener { documents ->
+                                        if(documents != null){
+                                            var sendToId =""
+                                            var documents = documents.documents
+                                            for(item in documents){
+                                                sendToId = item.id
+                                            }
+                                            fireStore.collection("Profile").document(sendToId).update("friends",FieldValue.arrayRemove(currentUsername)).addOnCompleteListener { task ->
+                                                if (task.isSuccessful){
+                                                    fireStore.collection("Profile").document(sendToId).update("friends",
+                                                        FieldValue.arrayUnion(currentUsername))
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                this.notifyDataSetChanged()
+                            }
+                        }.addOnFailureListener {
+                            println(it.localizedMessage)
+                        }
+                    }
+                }
+            }
     }
 }

@@ -111,8 +111,10 @@ class FriendsAddFragment : Fragment() {
                         for(document in documents)
                         {
                             var username = document.get("username") as String
+                            if(username != currentUsername){
+                                userList.add(username)
+                            }
 
-                            userList.add(username)
                         }
                         checkFriendList()
 

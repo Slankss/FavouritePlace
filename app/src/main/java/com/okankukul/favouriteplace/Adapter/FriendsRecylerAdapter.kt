@@ -26,7 +26,6 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
     private lateinit var auth : FirebaseAuth
     private lateinit var fireStore : FirebaseFirestore
     private var currentUsername=""
-    var result = false
 
     class PostHolder(itemView : View) : RecyclerView.ViewHolder(itemView)  {
 
@@ -230,8 +229,12 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
                                             for(item in documents){
                                                 sendToId = item.id
                                             }
-                                        fireStore.collection("Profile").document(sendToId).update("friends",FieldValue.arrayUnion(senderUsername))
-                                        }
+                                            fireStore.collection("Profile").document(sendToId).update("friends",FieldValue.arrayRemove(senderUsername)).addOnCompleteListener { task ->
+                                                if (task.isSuccessful){
+                                                    fireStore.collection("Profile").document(sendToId).update("friends",
+                                                        FieldValue.arrayUnion(senderUsername))
+                                                }
+                                            }                                        }
                                     }
                                 fireStore.collection("Profile").whereEqualTo("username",senderUsername).get()
                                     .addOnSuccessListener { documents ->
@@ -241,8 +244,12 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
                                             for(item in documents){
                                                 sendToId = item.id
                                             }
-                                            fireStore.collection("Profile").document(sendToId).update("friends",FieldValue.arrayUnion(currentUsername))
-                                        }
+                                            fireStore.collection("Profile").document(sendToId).update("friends",FieldValue.arrayRemove(currentUsername)).addOnCompleteListener { task ->
+                                                if (task.isSuccessful){
+                                                    fireStore.collection("Profile").document(sendToId).update("friends",
+                                                        FieldValue.arrayUnion(currentUsername))
+                                                }
+                                            }                                        }
                                     }
                                 this.notifyDataSetChanged()
                             }

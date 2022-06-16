@@ -9,11 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.okankukul.favouriteplace.Adapter.FriendRequestAdapter
-import com.okankukul.favouriteplace.Adapter.FriendsRecylerAdapter
-import com.okankukul.favouriteplace.Adapter.SendToFriendRequestFragment
 import com.okankukul.favouriteplace.R
 import com.okankukul.favouriteplace.databinding.FragmentFriendRequestBinding
-import com.okankukul.favouriteplace.databinding.FragmentFriendsBinding
 
 
 class FriendRequestFragment : Fragment() {
@@ -53,7 +50,7 @@ class FriendRequestFragment : Fragment() {
         binding.btnSendToRequest.setOnClickListener {
             activity?.let {
                 val transaction = it.supportFragmentManager.beginTransaction()
-                transaction.replace(R.id.navHost,SendToFriendRequestFragment())
+                transaction.replace(R.id.navHost, SendToFriendRequestFragment())
                 transaction.addToBackStack(null)
                 transaction.commit()
             }
