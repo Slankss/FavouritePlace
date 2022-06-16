@@ -24,6 +24,7 @@ class FriendsAddFragment : Fragment() {
 
     private var userList = ArrayList<String>()
     private var requestList = ArrayList<String>()
+    private var gelenRequestList = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,10 +43,11 @@ class FriendsAddFragment : Fragment() {
         }
 
         checkFriendRequest()
+        checkGelenFriendRequest()
 
         val layoutManager = LinearLayoutManager(view.context)
         binding.recyclerView.layoutManager = layoutManager
-        recyclerViewAdapter= FriendsRecylerAdapter(userList,view.context,R.string.add_friend.toString(),requestList)
+        recyclerViewAdapter= FriendsRecylerAdapter(userList,view.context,R.string.add_friend.toString(),requestList,gelenRequestList)
         binding.recyclerView.adapter = recyclerViewAdapter
 
 
@@ -195,5 +197,26 @@ class FriendsAddFragment : Fragment() {
 
     }
 
+    fun checkGelenFriendRequest(){
+
+        fireStore.collection("FriendRequests").whereEqualTo("sendToUsername",currentUsername).get()
+            .addOnSuccessListener { documents ->
+                if(documents != null){
+
+                    var documents = documents.documents
+                    if(documents != null){
+
+                        gelenRequestList.clear()
+                        for(item in documents)
+                        {
+                            var senderUsername = item.get("senderUsername") as String
+                            println(senderUsername)
+                            gelenRequestList.add(senderUsername
+                            )
+                        }
+                    }
+                }
+            }
+    }
 
 }

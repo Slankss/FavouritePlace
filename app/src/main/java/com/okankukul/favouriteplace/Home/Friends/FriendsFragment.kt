@@ -53,7 +53,7 @@ class FriendsFragment : Fragment() {
         val emptyList = ArrayList<String>()
         val layoutManager = LinearLayoutManager(view.context)
         binding.recyclerView.layoutManager = layoutManager
-        recyclerViewAdapter= FriendsRecylerAdapter(friendList,view.context,R.string.friend_list.toString(),emptyList)
+        recyclerViewAdapter= FriendsRecylerAdapter(friendList,view.context,R.string.friend_list.toString(),emptyList,emptyList)
         binding.recyclerView.adapter = recyclerViewAdapter
 
         binding.btnGoAddFriend.setOnClickListener {

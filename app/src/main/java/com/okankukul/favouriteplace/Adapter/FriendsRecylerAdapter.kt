@@ -10,7 +10,9 @@ import android.widget.Toast
 import androidx.compose.ui.graphics.Color
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.okankukul.favouriteplace.Home.Friends.FriendRequestFragment
 import com.okankukul.favouriteplace.Model.Post
 import com.okankukul.favouriteplace.R
 import com.okankukul.favouriteplace.databinding.RecyleerFriendsListBinding
@@ -18,7 +20,7 @@ import com.okankukul.favouriteplace.databinding.RecylerRowBinding
 import com.squareup.picasso.Picasso
 
 class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : Context,val key : String,
-    var requestList : ArrayList<String>) : RecyclerView.Adapter<FriendsRecylerAdapter.PostHolder>()
+    var requestList : ArrayList<String>,var gelenRequestList : ArrayList<String>) : RecyclerView.Adapter<FriendsRecylerAdapter.PostHolder>()
 {
     private lateinit var binding: RecyleerFriendsListBinding
     private lateinit var auth : FirebaseAuth
@@ -32,6 +34,7 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
         var btnFriendDelete : TextView = itemView.findViewById(R.id.btnFriendDelete)
         var btnAccept : ImageView = itemView.findViewById(R.id.btnAcceptInSearch)
         var btnCancel : ImageView = itemView.findViewById(R.id.btnCancelInSearch)
+        var txtGelenIstek : TextView = itemView.findViewById(R.id.txtGelenIstek)
 
     }
 
@@ -48,18 +51,20 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
         if(currentUser != null){
             currentUsername = currentUser.displayName.toString()
         }
+
         return PostHolder(view)
     }
 
     override fun onBindViewHolder(holder: PostHolder, position: Int) {
 
-        result=false
-        checkFriendRequest(friendList.get(position))
         holder.txtFriendName.text = friendList.get(position)
 
         if(key == R.string.add_friend.toString()){
             var request_id=0
-            if(!result){
+
+
+            if(!gelenRequestList.contains(friendList.get(position))){
+                holder.txtGelenIstek.visibility = View.GONE
                 holder.btnAccept.visibility = View.GONE
                 holder.btnCancel.visibility = View.GONE
                 holder.btnFriendDelete.visibility = View.VISIBLE
@@ -79,9 +84,18 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
                 }
             }
             else{
+                holder.txtGelenIstek.visibility = View.VISIBLE
                 holder.btnAccept.visibility = View.VISIBLE
                 holder.btnCancel.visibility = View.VISIBLE
                 holder.btnFriendDelete.visibility = View.GONE
+
+                holder.btnAccept.setOnClickListener {
+                    acceptRequest(friendList.get(position))
+                }
+
+                holder.btnCancel.setOnClickListener {
+                    cancelRequest(friendList.get(position))
+                }
             }
 
 
@@ -95,6 +109,7 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
             }
         }
         else{
+            holder.txtGelenIstek.visibility = View.GONE
             holder.btnAccept.visibility = View.GONE
             holder.btnCancel.visibility = View.GONE
             holder.btnFriendDelete.visibility = View.VISIBLE
@@ -136,8 +151,6 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
     fun deleteRequest(sendToUsername : String){
 
         var id = ""
-
-
         fireStore.collection("FriendRequests").whereEqualTo("senderUsername",currentUsername)
             .whereEqualTo("sendToUsername",sendToUsername)
             .get().addOnSuccessListener {   document ->
@@ -162,26 +175,81 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
                     }
                 }
             }
-
-
-
     }
+    fun cancelRequest(senderUsername : String){
+        var id = ""
+        fireStore.collection("FriendRequests").whereEqualTo("sendToUsername",currentUsername)
+            .whereEqualTo("senderUsername",senderUsername)
+            .get().addOnSuccessListener {   document ->
+                if(document != null)
+                {
+                    for (item in document){
+                        id = item.id
 
-    fun checkFriendRequest(senderName : String){
-        // DESCENDING -> DÜŞEN   ASCENDING -> YUKSELEN
-        fireStore.collection("FriendRequests").whereEqualTo("senderName",senderName)
-            .whereEqualTo("sendToUsername",currentUsername).get()
-            .addOnSuccessListener { documents ->
-                if(documents != null){
-
-                    var documents =documents.documents
-
-                    for(item in documents){
-                        result = true
-                        this.notifyDataSetChanged()
-                        break
                     }
 
+                    if(!id.isEmpty()){
+                        fireStore.collection("FriendRequests").document(id).delete().addOnCompleteListener {
+                            if(it.isSuccessful){
+                                Toast.makeText(mcontext,"İstek reddedildi",Toast.LENGTH_SHORT).show()
+                                gelenRequestList.remove(senderUsername)
+                                requestList.remove(senderUsername)
+                                this.notifyDataSetChanged()
+                            }
+                        }.addOnFailureListener {
+                            println(it.localizedMessage)
+                        }
+                    }
+                }
+            }
+    }
+
+    fun acceptRequest(senderUsername : String){
+
+        var id = ""
+        fireStore.collection("FriendRequests").whereEqualTo("senderUsername",senderUsername)
+            .whereEqualTo("sendToUsername",currentUsername)
+            .get().addOnSuccessListener {   document ->
+                if(document != null)
+                {
+                    for (item in document){
+                        id = item.id
+
+                    }
+
+                    if(!id.isEmpty()){
+                        fireStore.collection("FriendRequests").document(id).delete().addOnCompleteListener {
+                            if(it.isSuccessful){
+                                requestList.remove(senderUsername)
+
+                                fireStore.collection("Profile").whereEqualTo("username",currentUsername).get()
+                                    .addOnSuccessListener { documents ->
+                                        if(documents != null){
+                                            var sendToId =""
+                                            var documents = documents.documents
+                                            for(item in documents){
+                                                sendToId = item.id
+                                            }
+                                        fireStore.collection("Profile").document(sendToId).update("friends",FieldValue.arrayUnion(senderUsername))
+                                        }
+                                    }
+                                fireStore.collection("Profile").whereEqualTo("username",senderUsername).get()
+                                    .addOnSuccessListener { documents ->
+                                        if(documents != null){
+                                            var sendToId =""
+                                            var documents = documents.documents
+                                            for(item in documents){
+                                                sendToId = item.id
+                                            }
+                                            fireStore.collection("Profile").document(sendToId).update("friends",FieldValue.arrayUnion(currentUsername))
+                                        }
+                                    }
+                                this.notifyDataSetChanged()
+                            }
+                        }.addOnFailureListener {
+                            println(it.localizedMessage)
+                        }
+                    }
                 }
             }
     }
