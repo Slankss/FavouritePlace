@@ -12,147 +12,147 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="25dp"
         android:orientation="vertical"
-        android:paddingStart="25dp"
+
         android:paddingTop="10dp"
-        android:paddingEnd="25dp"
         android:paddingBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/usernameInputLayout"
-            android:layout_marginBottom="25dp"
-            android:layout_width="match_parent"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
             app:boxCornerRadiusBottomEnd="7dp"
             app:boxCornerRadiusBottomStart="7dp"
             app:boxCornerRadiusTopEnd="7dp"
             app:boxCornerRadiusTopStart="7dp"
+            app:boxStrokeColor="@color/special_black"
+            app:boxStrokeErrorColor="#FF0000"
+            app:endIconMode="clear_text"
+            app:errorIconDrawable="@android:drawable/stat_notify_error"
+            app:errorTextColor="#FF0000"
+            app:helperText=""
+            app:hintTextColor="@color/special_black"
             app:startIconDrawable="@drawable/ic_user"
             tools:layout_editor_absoluteX="1dp"
-            app:helperText=""
-            app:errorTextColor="#FF0000"
-            app:errorIconDrawable="@android:drawable/stat_notify_error"
-            app:endIconMode="clear_text"
-            app:boxStrokeColor="@color/special_black"
-            app:hintTextColor="@color/special_black"
-            app:boxStrokeErrorColor="#FF0000"
             tools:layout_editor_absoluteY="719dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/username_edit_text"
                 android:layout_width="match_parent"
-                android:textColor="@color/special_black"
-                android:textCursorDrawable="@drawable/cursor_color"
-                android:textColorHighlight="@color/special_orange"
                 android:layout_height="wrap_content"
+                android:hint="Kullanıcı adı"
                 android:inputType="text"
-                android:hint="Kullanıcı adı" />
+                android:textColor="@color/special_black"
+                android:textColorHighlight="@color/special_orange"
+                android:textCursorDrawable="@drawable/cursor_color" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailInputLayout"
-            android:layout_marginBottom="25dp"
-            android:layout_width="match_parent"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
             app:boxCornerRadiusBottomEnd="7dp"
             app:boxCornerRadiusBottomStart="7dp"
             app:boxCornerRadiusTopEnd="7dp"
             app:boxCornerRadiusTopStart="7dp"
+            app:boxStrokeColor="@color/special_black"
+            app:boxStrokeErrorColor="#FF0000"
+            app:endIconMode="clear_text"
+            app:errorIconDrawable="@android:drawable/stat_notify_error"
+            app:errorTextColor="#FF0000"
+            app:helperText=""
+            app:hintTextColor="@color/special_black"
             app:startIconDrawable="@drawable/ic_email"
             tools:layout_editor_absoluteX="1dp"
-            app:endIconMode="clear_text"
-            app:helperText=""
-            app:errorTextColor="#FF0000"
-            app:errorIconDrawable="@android:drawable/stat_notify_error"
-            app:boxStrokeColor="@color/special_black"
-            app:hintTextColor="@color/special_black"
-            app:boxStrokeErrorColor="#FF0000"
             tools:layout_editor_absoluteY="719dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email_edit_text"
                 android:layout_width="match_parent"
-                android:textColor="@color/special_black"
-                android:textCursorDrawable="@drawable/cursor_color"
-                android:textColorHighlight="@color/special_orange"
                 android:layout_height="wrap_content"
+                android:hint="Email"
                 android:inputType="textEmailAddress"
-                android:hint="Email" />
+                android:textColor="@color/special_black"
+                android:textColorHighlight="@color/special_orange"
+                android:textCursorDrawable="@drawable/cursor_color" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/paswordInputLayout"
-            android:layout_marginBottom="25dp"
-            android:layout_width="match_parent"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
             app:boxCornerRadiusBottomEnd="7dp"
             app:boxCornerRadiusBottomStart="7dp"
             app:boxCornerRadiusTopEnd="7dp"
             app:boxCornerRadiusTopStart="7dp"
+            app:boxStrokeColor="@color/special_black"
+            app:boxStrokeErrorColor="#FF0000"
+            app:endIconMode="password_toggle"
+            app:errorIconDrawable="@android:drawable/stat_notify_error"
+            app:errorTextColor="#FF0000"
+            app:helperText=""
+            app:hintTextColor="@color/special_black"
             app:startIconDrawable="@drawable/password"
             tools:layout_editor_absoluteX="1dp"
-            app:helperText=""
-            app:errorTextColor="#FF0000"
-            app:errorIconDrawable="@android:drawable/stat_notify_error"
-            app:endIconMode="password_toggle"
-            app:boxStrokeColor="@color/special_black"
-            app:hintTextColor="@color/special_black"
-            app:boxStrokeErrorColor="#FF0000"
             tools:layout_editor_absoluteY="719dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_edit_text"
                 android:layout_width="match_parent"
-                android:textColor="@color/special_black"
-                android:textCursorDrawable="@drawable/cursor_color"
-                android:textColorHighlight="@color/special_orange"
                 android:layout_height="wrap_content"
+                android:hint="Parola"
                 android:inputType="textPassword"
-                android:hint="Parola" />
+                android:textColor="@color/special_black"
+                android:textColorHighlight="@color/special_orange"
+                android:textCursorDrawable="@drawable/cursor_color" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/pasword_confirmInputLayout"
-            android:layout_marginBottom="25dp"
-            android:layout_width="match_parent"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
             app:boxCornerRadiusBottomEnd="7dp"
             app:boxCornerRadiusBottomStart="7dp"
             app:boxCornerRadiusTopEnd="7dp"
             app:boxCornerRadiusTopStart="7dp"
-            app:startIconDrawable="@drawable/password"
-            tools:layout_editor_absoluteX="1dp"
+            app:boxStrokeColor="@color/special_black"
+            app:boxStrokeErrorColor="#FF0000"
             app:endIconMode="custom"
 
 
-            app:boxStrokeColor="@color/special_black"
-            app:hintTextColor="@color/special_black"
-            app:helperText=""
-            app:errorTextColor="#FF0000"
             app:errorIconDrawable="@android:drawable/stat_notify_error"
+            app:errorTextColor="#FF0000"
+            app:helperText=""
             app:helperTextTextColor="#FF0000"
-            app:boxStrokeErrorColor="#FF0000"
+            app:hintTextColor="@color/special_black"
+            app:startIconDrawable="@drawable/password"
+            tools:layout_editor_absoluteX="1dp"
             tools:layout_editor_absoluteY="719dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_confirm_edit_text"
                 android:layout_width="match_parent"
-                android:textColor="@color/special_black"
-                android:textCursorDrawable="@drawable/cursor_color"
-                android:textColorHighlight="@color/special_orange"
                 android:layout_height="wrap_content"
+                android:hint="Parola tekrar"
                 android:inputType="textPassword"
-                android:hint="Parola tekrar" />
+                android:textColor="@color/special_black"
+                android:textColorHighlight="@color/special_orange"
+                android:textCursorDrawable="@drawable/cursor_color" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -171,9 +171,11 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_height="0dp"
         android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
         android:src="@drawable/ic_undraw_location_search_re_ttoj"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
         app:layout_constraintStart_toStartOf="@+id/linearLayout2"
         app:layout_constraintTop_toTopOf="parent" />

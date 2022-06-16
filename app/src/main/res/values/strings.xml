@@ -15,5 +15,7 @@
     <string name="add_friend">add_friend</string>
     <string name="add_request">add_request</string>
     <string name="delete_request">delete_request</string>
+    <string name="sender_friend_request">sender_friend_request</string>
+    <string name="sendTo_friend_request">sendTo_friend_request</string>
 
 </resources>

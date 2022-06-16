@@ -24,13 +24,22 @@ class FriendsFragment : Fragment() {
     private lateinit var fireStore : FirebaseFirestore
 
     private lateinit var recyclerViewAdapter : FriendsRecylerAdapter
+    var currentUsername=""
 
     private var friendList = ArrayList<String>()
+    private var requestList = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         auth = FirebaseAuth.getInstance()
         fireStore = FirebaseFirestore.getInstance()
+
+        var currentUser = auth.currentUser
+
+        if(currentUser != null){
+            currentUsername = currentUser.displayName.toString()
+        }
+
 
     }
 
@@ -38,6 +47,8 @@ class FriendsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         getFriends(view)
+        getFriendRequest()
+
 
         val emptyList = ArrayList<String>()
         val layoutManager = LinearLayoutManager(view.context)
@@ -49,6 +60,15 @@ class FriendsFragment : Fragment() {
             activity?.let {
                 val transaction = it.supportFragmentManager.beginTransaction()
                 transaction.replace(R.id.navHost,FriendsAddFragment())
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
+        }
+
+        binding.btnGoRequestPage.setOnClickListener {
+            activity?.let {
+                val transaction = it.supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.navHost,FriendRequestFragment())
                 transaction.addToBackStack(null)
                 transaction.commit()
             }
@@ -67,11 +87,7 @@ class FriendsFragment : Fragment() {
 
     fun getFriends(view : View){
 
-        var currentUser = auth.currentUser
-        var currentUsername=""
-        if(currentUser != null){
-            currentUsername = currentUser.displayName.toString()
-        }
+
 
         // DESCENDING -> DÜŞEN   ASCENDING -> YUKSELEN
         fireStore.collection("Profile").whereEqualTo("username",currentUsername).addSnapshotListener { snapshot, exception ->
@@ -104,6 +120,29 @@ class FriendsFragment : Fragment() {
                 }
             }
         }
+
+    }
+
+    fun getFriendRequest() {
+
+        // DESCENDING -> DÜŞEN   ASCENDING -> YUKSELEN
+        fireStore.collection("FriendRequests").whereEqualTo("sendToUsername", currentUsername).get()
+            .addOnSuccessListener { documents ->
+                if (documents != null) {
+
+                    var documents = documents.documents
+
+                    requestList.clear()
+                    for (item in documents) {
+
+                        var sendToUsername = item.get("sendToUsername") as String
+                        requestList.add(sendToUsername)
+
+                    }
+                    binding.txtNumberOfRequest.text = requestList.size.toString()
+                }
+            }
+
 
     }
 

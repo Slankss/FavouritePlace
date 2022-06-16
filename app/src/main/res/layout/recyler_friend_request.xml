@@ -16,7 +16,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/txtFriendNname"
+            android:id="@+id/txtSenderName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Slanks"
@@ -27,37 +27,23 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"></TextView>
 
-        <TextView
-            android:id="@+id/btnFriendDelete"
-            android:padding="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Arkadaşlarımdan Çıkar"
-            android:background="@drawable/text_box"
-            android:textSize="10sp"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/white"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="5dp"></TextView>
-
         <ImageView
-            android:id="@+id/btnCancelInSearch"
+            android:id="@+id/btnAccept"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_cancel"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true">
-
-        </ImageView>
-
-        <ImageView
-            android:id="@+id/btnAcceptInSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/btnCancelInSearch"
-            android:layout_marginRight="10dp"
             android:src="@drawable/ic_accept"
-            android:layout_alignParentTop="true">
+            android:layout_marginRight="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/btnCancel"
+            >
+        </ImageView>
+        <ImageView
+            android:id="@+id/btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_cancel">
 
         </ImageView>
 

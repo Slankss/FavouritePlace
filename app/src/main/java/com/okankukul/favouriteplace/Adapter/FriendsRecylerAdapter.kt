@@ -24,13 +24,14 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
     private lateinit var auth : FirebaseAuth
     private lateinit var fireStore : FirebaseFirestore
     private var currentUsername=""
+    var result = false
 
     class PostHolder(itemView : View) : RecyclerView.ViewHolder(itemView)  {
 
         var txtFriendName : TextView = itemView.findViewById(R.id.txtFriendNname)
         var btnFriendDelete : TextView = itemView.findViewById(R.id.btnFriendDelete)
-
-
+        var btnAccept : ImageView = itemView.findViewById(R.id.btnAcceptInSearch)
+        var btnCancel : ImageView = itemView.findViewById(R.id.btnCancelInSearch)
 
     }
 
@@ -52,25 +53,37 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
 
     override fun onBindViewHolder(holder: PostHolder, position: Int) {
 
+        result=false
+        checkFriendRequest(friendList.get(position))
+        holder.txtFriendName.text = friendList.get(position)
+
         if(key == R.string.add_friend.toString()){
-
             var request_id=0
+            if(!result){
+                holder.btnAccept.visibility = View.GONE
+                holder.btnCancel.visibility = View.GONE
+                holder.btnFriendDelete.visibility = View.VISIBLE
+                if(requestList.contains(friendList.get(position))){
+                    holder.btnFriendDelete.text = "İsteği geri çek"
+                    holder.btnFriendDelete.setBackgroundResource(R.drawable.text_box_orange)
+                    holder.btnFriendDelete.setTextColor(Color.Black.hashCode())
 
+                    request_id=R.string.delete_request
+                }
+                else{
+                    holder.btnFriendDelete.text = "İstek gönder"
+                    holder.btnFriendDelete.setBackgroundResource(R.drawable.text_box)
+                    holder.btnFriendDelete.setTextColor(Color.White.hashCode())
 
-            if(requestList.contains(friendList.get(position))){
-                holder.btnFriendDelete.text = "İsteği geri çek"
-                holder.btnFriendDelete.setBackgroundResource(R.drawable.text_box_orange)
-                holder.btnFriendDelete.setTextColor(Color.Black.hashCode())
-
-                request_id=R.string.delete_request
+                    request_id=R.string.add_request
+                }
             }
             else{
-                holder.btnFriendDelete.text = "İstek gönder"
-                holder.btnFriendDelete.setBackgroundResource(R.drawable.text_box)
-                holder.btnFriendDelete.setTextColor(Color.White.hashCode())
-
-                request_id=R.string.add_request
+                holder.btnAccept.visibility = View.VISIBLE
+                holder.btnCancel.visibility = View.VISIBLE
+                holder.btnFriendDelete.visibility = View.GONE
             }
+
 
             holder.btnFriendDelete.setOnClickListener {
                 if(request_id == R.string.add_request){
@@ -82,14 +95,14 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
             }
         }
         else{
+            holder.btnAccept.visibility = View.GONE
+            holder.btnCancel.visibility = View.GONE
+            holder.btnFriendDelete.visibility = View.VISIBLE
             holder.btnFriendDelete.text = "Arkadaşlarımdan çıkar"
-
             holder.btnFriendDelete.setOnClickListener {
 
             }
         }
-
-        holder.txtFriendName.text = friendList.get(position)
 
     }
 
@@ -152,6 +165,25 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
 
 
 
+    }
+
+    fun checkFriendRequest(senderName : String){
+        // DESCENDING -> DÜŞEN   ASCENDING -> YUKSELEN
+        fireStore.collection("FriendRequests").whereEqualTo("senderName",senderName)
+            .whereEqualTo("sendToUsername",currentUsername).get()
+            .addOnSuccessListener { documents ->
+                if(documents != null){
+
+                    var documents =documents.documents
+
+                    for(item in documents){
+                        result = true
+                        this.notifyDataSetChanged()
+                        break
+                    }
+
+                }
+            }
     }
 
 

@@ -16,7 +16,7 @@
         android:fontFamily="@font/courgette"
         android:text="Giriş Ekranı"
         android:textColor="@color/special_black"
-        android:textSize="34sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="@+id/imageView" />
@@ -25,9 +25,9 @@
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginEnd="25dp"
         android:orientation="vertical"
         android:paddingTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -117,7 +117,7 @@
             android:layout_gravity="center"
             android:text="Hesabın yok mu? Kayıt Ol"
             android:textColor="@color/special_black"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
     </LinearLayout>

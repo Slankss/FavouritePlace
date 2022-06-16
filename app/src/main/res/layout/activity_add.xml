@@ -16,7 +16,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="50dp"
         android:visibility="visible"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
@@ -61,8 +61,8 @@
         android:id="@+id/linearLayout3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         android:layout_marginBottom="50dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -81,7 +81,7 @@
             android:textAllCaps="false"
             android:textColor="@color/special_black"
             android:textColorHint="#80292929"
-            android:textSize="17sp"
+            android:textSize="16sp"
 
             android:textStyle="bold" />
 
@@ -95,7 +95,7 @@
             android:textAllCaps="false"
             android:textColor="@color/special_black"
             android:textColorHint="#80292929"
-            android:textSize="17sp" />
+            android:textSize="15sp" />
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -153,7 +153,7 @@
         android:fontFamily="@font/lobster"
         android:text="Favorilere Ekle"
         android:textColor="@color/special_black"
-        android:textSize="34sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

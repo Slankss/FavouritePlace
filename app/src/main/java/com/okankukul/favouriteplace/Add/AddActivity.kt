@@ -19,6 +19,7 @@ import android.provider.MediaStore
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.compose.ui.graphics.Color
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -99,7 +100,7 @@ class AddActivity : AppCompatActivity() {
         }
         else
         {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,60,1f,locationListener)
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,1,1f,locationListener)
         }
 
         binding.addPhoto.setOnClickListener {
@@ -107,7 +108,9 @@ class AddActivity : AppCompatActivity() {
         }
 
         binding.btnSave.setOnClickListener {
+
             if(check()){
+                binding.btnSave.setEnabled(false)
                 addFavourite()
             }
         }
@@ -136,9 +139,9 @@ class AddActivity : AppCompatActivity() {
 
         try {
 
-            imageFile = File.createTempFile(gorselIsmi,".jpg",storageDirectory);
+            imageFile = File.createTempFile(gorselIsmi,".jpg",storageDirectory)
 
-            gorselYolu = imageFile.absolutePath;
+            gorselYolu = imageFile.absolutePath
             gorselUrl = FileProvider.getUriForFile(this,
                 "com.okankukul.favouriteplace.fileprovider",imageFile)
 
@@ -200,12 +203,12 @@ class AddActivity : AppCompatActivity() {
                             }
 
                         }.addOnFailureListener { exception ->
-                            Toast.makeText(applicationContext,exception.localizedMessage,Toast.LENGTH_LONG).show()
+                            println(exception.localizedMessage)
                         }
                     }
 
                 }.addOnFailureListener { exception ->
-                    Toast.makeText(applicationContext,exception.localizedMessage,Toast.LENGTH_LONG).show()
+                    println(exception.localizedMessage)
                 }
 
             }
@@ -222,6 +225,7 @@ class AddActivity : AppCompatActivity() {
 
             // gorselUrl = data.data
 
+            binding.txtTakeCamera.visibility = View.GONE
             binding.txtTakeCamera.visibility = View.GONE
             binding.imgCamera.scaleType = ImageView.ScaleType.CENTER_CROP
             gorselBitMap = BitmapFactory.decodeFile(gorselYolu) // data?.getParcelableExtra<Bitmap>("data")
@@ -255,7 +259,7 @@ class AddActivity : AppCompatActivity() {
             if(grantResults.size >0){
                 if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
                     // izni aldık konumu alıcaz
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,60,1f,locationListener)
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,1,1f,locationListener)
 
                 }
             }
