@@ -110,8 +110,10 @@ class AddActivity : AppCompatActivity() {
         binding.btnSave.setOnClickListener {
 
             if(check()){
-                binding.btnSave.setEnabled(false)
                 addFavourite()
+                if(gorselBitMap != null){
+                    binding.btnSave.setEnabled(false)
+                }
             }
         }
     }
@@ -172,7 +174,7 @@ class AddActivity : AppCompatActivity() {
         val guncelKullanici = auth.currentUser
 
         Toast.makeText(applicationContext,"${gorselUrl}",Toast.LENGTH_LONG)
-        if(gorselUrl != null){
+        if(gorselBitMap != null){
 
             val reference = storage.reference
             val gorselReference =reference.child("images").child("${gorselIsmi}.jpg")
@@ -223,13 +225,14 @@ class AddActivity : AppCompatActivity() {
 
         if(requestCode == 101 && resultCode == Activity.RESULT_OK && data != null){
 
-            // gorselUrl = data.data
-
             binding.txtTakeCamera.visibility = View.GONE
             binding.txtTakeCamera.visibility = View.GONE
             binding.imgCamera.scaleType = ImageView.ScaleType.CENTER_CROP
             gorselBitMap = BitmapFactory.decodeFile(gorselYolu) // data?.getParcelableExtra<Bitmap>("data")
             binding.imgCamera.setImageBitmap(gorselBitMap)
+        }
+        else{
+            binding.btnSave.setEnabled(true)
         }
 
         super.onActivityResult(requestCode, resultCode, data)
@@ -252,6 +255,7 @@ class AddActivity : AppCompatActivity() {
                     cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,gorselUrl)
                     startActivityForResult(cameraIntent,101)
                 }
+
             }
         }
 
