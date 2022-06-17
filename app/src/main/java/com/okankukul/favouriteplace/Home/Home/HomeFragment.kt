@@ -23,18 +23,23 @@ class HomeFragment : Fragment() {
     private lateinit var auth : FirebaseAuth
     private lateinit var fireStore : FirebaseFirestore
     private lateinit var recyclerViewAdapter : RecylerAdapter
-
+    private var currentUsername = ""
     var postList = ArrayList<Post>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        auth = FirebaseAuth.getInstance()
+        fireStore = FirebaseFirestore.getInstance()
+        var currentUser = auth.currentUser
+        if(currentUser != null){
+            currentUsername = currentUser.displayName.toString()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        auth = FirebaseAuth.getInstance()
-        fireStore = FirebaseFirestore.getInstance()
+
 
         getData(view)
 
@@ -60,40 +65,57 @@ class HomeFragment : Fragment() {
     fun getData(view : View){
 
         // DESCENDING -> DÜŞEN   ASCENDING -> YUKSELEN
-        fireStore.collection("Post").orderBy("date", Query.Direction.DESCENDING
-
-
-        ).addSnapshotListener { snapshot, exception ->
+        fireStore.collection("Profile").whereEqualTo("username",currentUsername).addSnapshotListener { snapshot, exception ->
             if(exception != null)
             {
                 println(exception.localizedMessage)
             }
-            else
-            {
-                if(snapshot != null)
-                {
-                    if(!snapshot.isEmpty) // boş değilse
-                    {
-                        val documents = snapshot.documents
-
-                        postList.clear()
-                        for(document in documents)
-                        {
-                            var userEmail = document.get("userEmail") as String
-                            var username = document.get("userName") as String
-                            var placeAdress = document.get("location") as String
-                            var placeName = document.get("placeName") as String
-                            var imageUrl = document.get("imageUrl") as String
-
-
-                            val  indirilenPost= Post(placeName,placeAdress,username,userEmail,imageUrl)
-                            postList.add(indirilenPost)
-                        }
-                        recyclerViewAdapter.notifyDataSetChanged() // verileri yenile demek
+            else{
+                if(snapshot != null && !snapshot.isEmpty){
+                    var documents = snapshot.documents
+                    var friendList = ArrayList<String>()
+                    for(document in documents){
+                        friendList = document.get("friends") as ArrayList<String>
                     }
+
+                    fireStore.collection("Post").orderBy("date", Query.Direction.DESCENDING
+                    ).addSnapshotListener { snapshot, exception ->
+                        if(exception != null)
+                        {
+                            println(exception.localizedMessage)
+                        }
+                        else
+                        {
+                            if(snapshot != null)
+                            {
+                                if(!snapshot.isEmpty) // boş değilse
+                                {
+                                    val documents = snapshot.documents
+
+                                    postList.clear()
+                                    for(document in documents)
+                                    {
+                                        var userEmail = document.get("userEmail") as String
+                                        var username = document.get("userName") as String
+                                        var placeAdress = document.get("location") as String
+                                        var placeName = document.get("placeName") as String
+                                        var imageUrl = document.get("imageUrl") as String
+
+                                        if(friendList.contains(username) || username == currentUsername){
+                                            val  indirilenPost= Post(placeName,placeAdress,username,userEmail,imageUrl)
+                                            postList.add(indirilenPost)
+                                        }
+                                    }
+                                    recyclerViewAdapter.notifyDataSetChanged() // verileri yenile demek
+                                }
+                            }
+                        }
+                    }
+
                 }
             }
         }
+
 
     }
 

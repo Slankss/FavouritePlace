@@ -1,5 +1,6 @@
 package com.okankukul.favouriteplace.Adapter
 
+import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -115,6 +116,17 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
             holder.btnFriendDelete.text = "Arkadaşlarımdan çıkar"
             holder.btnFriendDelete.setOnClickListener {
 
+                val builder = AlertDialog.Builder(mcontext)
+                builder.setTitle("Arkadaşlarımdan Çıkar")
+                builder.setMessage(friendList.get(position)+" adlı kullanıcıyı arkadaşlarınızdan çıkarmak istiyor musunuz?")
+
+                builder.setPositiveButton("Evet") { dialog, which ->
+                    deleteFriends(friendList.get(position))
+                }
+                builder.setNegativeButton("Hayır") { dialog, which ->
+
+                }
+                builder.show()
             }
         }
 
@@ -215,7 +227,6 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
                         id = item.id
 
                     }
-
                     if(!id.isEmpty()){
                         fireStore.collection("FriendRequests").document(id).delete().addOnCompleteListener {
                             if(it.isSuccessful){
@@ -251,6 +262,7 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
                                                 }
                                             }                                        }
                                     }
+                                Toast.makeText(mcontext,senderUsername+" arkadaş eklendi",Toast.LENGTH_LONG).show()
                                 this.notifyDataSetChanged()
                             }
                         }.addOnFailureListener {
@@ -259,6 +271,34 @@ class FriendsRecylerAdapter (var friendList : ArrayList<String>,val mcontext : C
                     }
                 }
             }
+    }
+
+    fun deleteFriends(friendName : String){
+        fireStore.collection("Profile").whereEqualTo("username",currentUsername).get()
+            .addOnSuccessListener { documents ->
+                if(documents != null){
+                    var sendToId =""
+                    var documents = documents.documents
+                    for(item in documents){
+                        sendToId = item.id
+                    }
+                    fireStore.collection("Profile").document(sendToId).update("friends",FieldValue.arrayRemove(friendName))
+                }
+            }
+        fireStore.collection("Profile").whereEqualTo("username",friendName).get()
+            .addOnSuccessListener { documents ->
+                if(documents != null){
+                    var sendToId =""
+                    var documents = documents.documents
+                    for(item in documents){
+                        sendToId = item.id
+                    }
+                    fireStore.collection("Profile").document(sendToId).update("friends",FieldValue.arrayRemove(currentUsername))
+
+                }
+            }
+        Toast.makeText(mcontext,friendName+" arkadaş listenizden çıkarıldı",Toast.LENGTH_LONG).show()
+        this.notifyDataSetChanged()
     }
 
 

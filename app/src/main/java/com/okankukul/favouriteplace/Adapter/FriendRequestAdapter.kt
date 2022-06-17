@@ -52,6 +52,10 @@ class FriendRequestAdapter (var requestList : ArrayList<String>, val mcontext : 
         holder.txtSenderName.text = requestList.get(position)
         if(key == R.string.sendTo_friend_request.toString()){
             holder.btnAccept.visibility = View.GONE
+            holder.btnCancel.setOnClickListener {
+                deleteRequest(requestList.get(position))
+            }
+
         }
         else{
             holder.btnAccept.visibility = View.VISIBLE
@@ -147,6 +151,36 @@ class FriendRequestAdapter (var requestList : ArrayList<String>, val mcontext : 
 
                                         }
                                     }
+                                Toast.makeText(mcontext,senderUsername+" arkadaş eklendi",Toast.LENGTH_LONG).show()
+                                this.notifyDataSetChanged()
+                            }
+                        }.addOnFailureListener {
+                            println(it.localizedMessage)
+                        }
+                    }
+                }
+            }
+    }
+
+    fun deleteRequest(sendToUsername : String){
+
+        var id = ""
+        fireStore.collection("FriendRequests").whereEqualTo("senderUsername",currentUsername)
+            .whereEqualTo("sendToUsername",sendToUsername)
+            .get().addOnSuccessListener {   document ->
+                if(document != null)
+                {
+                    for (item in document){
+                        id = item.id
+
+                    }
+
+                    if(!id.isEmpty()){
+                        fireStore.collection("FriendRequests").document(id).delete().addOnCompleteListener {
+                            if(it.isSuccessful){
+                                Toast.makeText(mcontext,"İstek geri çekildi",Toast.LENGTH_SHORT).show()
+
+                                requestList.remove(sendToUsername)
                                 this.notifyDataSetChanged()
                             }
                         }.addOnFailureListener {
