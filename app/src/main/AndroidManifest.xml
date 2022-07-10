@@ -15,9 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FavouritePlace">
-        <activity
-            android:name=".Home.Friends.FriendsAddActivity"
-            android:exported="false" />
+
         <activity
             android:name=".Home.Edit.EditActivity"
             android:exported="false" />

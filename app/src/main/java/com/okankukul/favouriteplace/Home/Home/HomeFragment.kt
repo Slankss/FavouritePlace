@@ -13,13 +13,13 @@ import com.google.firebase.firestore.Query
 import com.okankukul.favouriteplace.Adapter.RecylerAdapter
 import com.okankukul.favouriteplace.Model.Post
 import com.okankukul.favouriteplace.R
-import com.okankukul.favouriteplace.databinding.ActivityHomeBinding
 import com.okankukul.favouriteplace.databinding.FragmentHomeBinding
 import com.okankukul.favouriteplace.databinding.FragmentLoginBinding
 
 class HomeFragment : Fragment() {
 
-    private lateinit var binding : FragmentHomeBinding
+    private var _binding : FragmentHomeBinding? = null
+    private val binding  get() = _binding!!
     private lateinit var auth : FirebaseAuth
     private lateinit var fireStore : FirebaseFirestore
     private lateinit var recyclerViewAdapter : RecylerAdapter
@@ -56,10 +56,12 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentHomeBinding.inflate(layoutInflater)
+        _binding = FragmentHomeBinding.inflate(inflater,container,false)
+
+        val view = binding.root
         auth = FirebaseAuth.getInstance()
 
-        return binding.root
+        return view
     }
 
     fun getData(view : View){
@@ -117,6 +119,11 @@ class HomeFragment : Fragment() {
         }
 
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 

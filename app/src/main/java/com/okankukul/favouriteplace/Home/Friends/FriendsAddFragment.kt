@@ -86,7 +86,6 @@ class FriendsAddFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentFriendsAddBinding.inflate(layoutInflater)
-
         return binding.root
     }
 
