@@ -7,7 +7,6 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.okankukul.favouriteplace.Home.HomeActivity
 import com.okankukul.favouriteplace.R
-import com.okankukul.favouriteplace.databinding.ActivityLoginBinding
 import com.okankukul.favouriteplace.databinding.FragmentLoginBinding
 
 class LoginActivity : AppCompatActivity() {

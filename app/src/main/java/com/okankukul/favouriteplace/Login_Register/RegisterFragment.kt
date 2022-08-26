@@ -17,7 +17,8 @@ import com.okankukul.favouriteplace.databinding.FragmentRegisterBinding
 
 class RegisterFragment : Fragment() {
 
-    private lateinit var binding : FragmentRegisterBinding
+    private  var _binding : FragmentRegisterBinding? = null
+    private val binding get() = _binding!!
     private lateinit var auth : FirebaseAuth
     private lateinit var fireStore : FirebaseFirestore
     private var email = ""
@@ -38,7 +39,7 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentRegisterBinding.inflate(layoutInflater)
+        _binding = FragmentRegisterBinding.inflate(inflater,container,false)
         auth = FirebaseAuth.getInstance()
         fireStore = FirebaseFirestore.getInstance()
 
@@ -129,6 +130,11 @@ class RegisterFragment : Fragment() {
             println(exception.localizedMessage)
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }

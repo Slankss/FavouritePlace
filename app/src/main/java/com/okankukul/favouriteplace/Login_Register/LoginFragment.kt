@@ -16,7 +16,8 @@ import com.okankukul.favouriteplace.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
 
-    private lateinit var binding : FragmentLoginBinding
+    private var _binding : FragmentLoginBinding? = null
+    private val binding get() = _binding!!
     private lateinit var auth : FirebaseAuth
     private var email = ""
     private var password = ""
@@ -32,7 +33,7 @@ class LoginFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        binding = FragmentLoginBinding.inflate(layoutInflater)
+        _binding = FragmentLoginBinding.inflate(inflater,container,false)
         auth = FirebaseAuth.getInstance()
 
         return binding.root
@@ -96,6 +97,11 @@ class LoginFragment : Fragment() {
             Toast.makeText(context,"Boş değerler var", Toast.LENGTH_LONG).show()
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 
